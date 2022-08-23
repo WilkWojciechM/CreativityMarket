@@ -1,0 +1,10 @@
+insert into field (name) values ('Software Engineer II');
+insert into field (name) values ('Teacher');
+insert into field (name) values ('Professor');
+insert into field (name) values ('Senior Quality Engineer');
+insert into field (name) values ('Mechanical Systems Engineer');
+insert into field (name) values ('Marketing Assistant');
+insert into field (name) values ('Senior Developer');
+insert into field (name) values ('Quality Control Specialist');
+insert into field (name) values ('Electrical Engineer');
+insert into field (name) values ('Dental Hygienist');
