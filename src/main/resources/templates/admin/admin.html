@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrator panel</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+  <p class="notification-bar" th:if="${notification}" th:text="${notification}">
+    Notification
+  </p>
+  <h2 class="list-heading">Administrator panel</h2>
+  <ul class="list-border">
+    <li><a href="#" th:href="@{/admin/add-field}">Add field</a></li>
+    <li><a href="#" th:href="@{/admin/delete-project}">Delete project</a></li>
+    <li><a href="#" th:href="@{/admin/delete-field}">Delete field</a></li>
+    <li><a href="#" th:href="@{/admin/delete-user}">Delete user</a></li>
+    <li><a href="#" th:href="@{/admin/delete-employer}">Delete employer</a></li>
+    <li><a href="#" th:href="@{/admin/delete-job-offer}">Delete job offer</a></li>
+  </ul>
+</main>
+</body>
+</html>

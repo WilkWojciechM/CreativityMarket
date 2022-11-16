@@ -6,13 +6,17 @@ public class ProjectDto {
     private String field;
     private String creator;
     private boolean promoted;
+    private String description;
+    private String youtubeId;
 
-    public ProjectDto(Long id, String name, String creator, String field, boolean promoted) {
+    public ProjectDto(Long id, String name, String creator, boolean promoted, String field, String description, String youtubeId) {
         this.id = id;
         this.name = name;
         this.creator = creator;
-        this.field = field;
         this.promoted = promoted;
+        this.field = field;
+        this.description = description;
+        this.youtubeId = youtubeId;
     }
 
     public Long getId() {
@@ -54,4 +58,22 @@ public class ProjectDto {
     public void setPromoted(boolean promoted) {
         this.promoted = promoted;
     }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getYoutubeId() {
+        return youtubeId;
+    }
+
+    public void setYoutubeId(String youtubeId) {
+        this.youtubeId = youtubeId;
+    }
+
 }

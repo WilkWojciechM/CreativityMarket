@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>CreativityMarket</title>
+  <meta name="viewport" content="width=device-width , initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Dynamicznie budowany adres do skryptu JS i arkusza stylów -->
+  <script defer src="../static/scripts/common.js" th:src="@{/scripts/common.js}"></script>
+  <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}">
+</head>
+
+<body>
+<div class="container">
+  <ul class="menu">
+    <li class="menu-logo-container">
+      <!-- Dynamicznie budowany adres do strony głównej -->
+      <a href="#" th:href="@{/}">
+        <i class="fa-solid fa-palette"></i> CreativityMarket
+      </a>
+    </li>
+    <li class="menu-toggle">
+      <a href="#"><i id="toggle-icon" class="fa-solid fa-square-plus"></i></a>
+    </li>
+    <li class="menu-item">
+      <a href="#" th:href="@{/fields}">Field of work</a>
+    </li>
+
+    <li class="menu-item">
+      <a href="#">Top 10 projects</a>
+    </li>
+
+    <li class="menu-item">
+      <a href="#">Top 10 employers</a>
+    </li>
+
+    <li class="menu-item">
+      <a href="#">Log In</a>
+    </li>
+
+    <li class="menu-item">
+      <a href="#" th:href="@{/admin}">Admin panel</a>
+    </li>
+  </ul>
+  <header class="MojaDigital">
+    <h1 class="MojaDigital-header">CreativityMarket</h1>
+    <p class="MojaDigital-description">
+      Welcome to CreativityMarket, we'll help you find freelancers for your job
+    </p>
+  </header>
+  <main class="main-content" layout:fragment="content">
+  </main>
+  <footer class="footer">
+    <p>CreativityMarket 2022 <i class="fas fa-copyright"></i> Wojciech Wilk </p>
+  </footer>
+</div>
+</body>
+</html>

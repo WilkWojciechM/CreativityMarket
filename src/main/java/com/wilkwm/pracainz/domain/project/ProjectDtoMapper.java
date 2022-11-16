@@ -8,8 +8,10 @@ public class ProjectDtoMapper {
                 project.getId(),
                 project.getName(),
                 project.getCreator(),
+                project.isPromoted(),
                 project.getField().getName(),
-                project.isPromoted()
+                project.getDescription(),
+                project.getYoutubeId()
         );
     }
 }

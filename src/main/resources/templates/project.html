@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="|${project.name} - CreativityMarket|">Project name - CreativityMarket</title>
+</head>
+
+<body>
+<div class="container">
+    <main class="main-content" layout:fragment="content">
+        <section class="project">
+            <div class="project-summary">
+                <img src="../static/img/poster-placeholder.png"
+                     alt="project name"
+                     class="project-summary-cover"
+                />
+            </div>
+        <div class="project-summary-info">
+            <h1 class="project-summary-title" th:text="${project.name}">Project name</h1>
+            <p class="project-summary-item">Field: <a href="#"
+            th:href="@{|/field/${project.field}|}"
+            th:text="${project.field}"></a>
+            </p>
+
+            <p class="project-summary-item">Creator: <a href="#"
+            th:href="@{|/creator/${project.creator}|}"
+            th:text="${project.creator}"></a></p>
+
+            <p class="project-summary-item" th:text="${project.description}">
+            What project is about.
+            </p>
+
+        </div>
+
+        <div class="project-rating-container project-section">
+            <h2 class="project-section-heading">Rating</h2>
+            <div>
+                <p class="project-rating-value" th:text="${avgRating}">4.0</p>
+                <p> Ratings: 189</p>
+            </div>
+            <form action="#" class="project-rating-form">
+                <p>Your rating</p>
+                <input type="hidden" name="projectId">
+                <div class="project-rating-buttons">
+                    <button class="project-rating-button"><i class="fa-solid fa-star"></i></button>
+                    <button class="project-rating-button"><i class="fa-solid fa-star"></i></button>
+                    <button class="project-rating-button"><i class="fa-solid fa-star"></i></button>
+                    <button class="project-rating-button"><i class="fa-solid fa-star"></i></button>
+                    <button class="project-rating-button"><i class="fa-regular fa-star"></i></button>
+                </div>
+            </form>
+            <p><a href="#">Log in</a> to rate this project</p>
+        </div>
+        </section>
+
+        <section class="project-movie-container project-section">
+            <h2 class="project-section-heading">Project trailer</h2>
+            <iframe width="560" height="315" class="project-trailer"
+                    src="https://www.youtube.com/embed/tgbNymZ7vqY?controls=0"
+                    th:src="|https://www.youtube.com/embed/${project.youtubeId}|"
+                    allow="autoplay:encrypted-media" allowfullscreen></iframe>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>CreativityMarket 2022 <i class="fas fa-copyright"></i> Wojciech Wilk </p>
+    </footer>
+</div>
+</body>
+</html>

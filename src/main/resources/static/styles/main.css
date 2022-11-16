@@ -28,6 +28,93 @@ i powinna zajmować większość dostępnej przestrzeni
 .main-content {
     flex: 1;
 }
+/*Project*/
+/*Info o projektcie */
+.project {
+    display: flex;
+    justify-content: space-between;
+}
+.project-summary {
+    display: flex;
+    margin-top: 16px;
+}
+/*Mniejsza okładka na małych ekranach*/
+.project-summary-cover {
+    object-fit: contain;
+    max-width: 200px;
+}
+/*Odstęp informacji o filmie od okładki*/
+.project-summary-info {
+    margin-left: 16px;
+}
+
+/*Odstępy między poszczególnymi informacjami*/
+.project-summary-item {
+    margin: 8px 0;
+}
+/*Większy tytuł projektu*/
+.project-summary-title {
+    align-items: center;
+    font-size: 2rem;
+    margin-top: 16px;
+}
+/*Wyśrodkowanie głosowania*/
+.project-rating-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 200px;
+}
+
+/*Wyśrodkowanie tekstu Twoja ocena*/
+.project-rating-form > p {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+/*Powiększenie i wyśrodkowanie średniej oceny*/
+.project-rating-value {
+    font-size: 4rem;
+    text-align: center;
+}
+/*Styl dla przycisków z ocenami*/
+.project-rating-button {
+    background-color: #ffc107;
+    border: 0;
+    padding: 4px;
+    font-size: 1.6rem;
+    margin: 0 4px;
+    border-radius: 4px;
+    opacity: 0.8;
+
+
+}
+/*Usunięcie przezroczystości po najechaniu na przycisk*/
+.project-rating-button:hover {
+    opacity: 1;
+}
+/*Odstępy między elementami w ramce z głosowaniem*/
+.project-rating-container > * {
+    margin: 8px 0;
+}
+/*Ramka dla boxu z głosowaniem*/
+.project-section {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px #6d6d6d solid;
+}
+/*Odstęp pod nagłówkami sekcji*/
+.movie-section-heading {
+    margin-bottom: 8px;
+}
+/*Wyśrodkowanie trailera*/
+.movie-trailer {
+    display: block;
+    margin: auto;
+}
+/*project.html END*/
+
 
 /*MENU START*/
 /*Kolor logotypu i przycisku rozwijającego menu*/
@@ -149,4 +236,63 @@ i powinna zajmować większość dostępnej przestrzeni
     }
     /*Listing END*/
 
+    /*error pages START*/
+    .error-container {
+        margin: 32px auto;
+    }
+    .error-container > * {
+        display: block;
+        text-align: center;
+    }
+    .error-header,
+    .error-icon {
+        font-size: 2rem;
+        margin: 16px 0;
+    }
+    /*error pages END*/
+
+    /*listowanie gatunków */
+    .list-border {
+        margin: auto;
+        list-style: none;
+    }
+    .list-border > li {
+        font-size: 1.2rem;
+        border: 1px #6d6d6d solid;
+        padding: 16px;
+        text-align: center;
+    }
+    /*textarea domyślnie nie dziedziczy czcionki z body*/
+    textarea {
+        font-family: inherit;
+    }
+    /*etykiety i inputy jeden pod drugim z odstępami po bokach*/
+    .mc-form {
+        display: flex;
+        flex-direction: column;
+        margin: 0 32px;
+    }
+    /*odstępy między etykietami i inputami*/
+    .mc-form > * {
+        margin-top: 8px;
+    }
+    /*większe inputy z paddingami*/
+    .mc-form > input,
+    .mc-form > textarea,
+    .mc-form > button {
+        font-size: 1.2rem;
+        color: black;
+        padding: 8px;
+    }
+    .mc-form > button {
+        margin-top: 16px;
+        background-color: white;
+        color: #ffc107;
+        border: none;
+    }
+    .notification-bar {
+        text-align: center;
+        background-color: #ffc107;
+        padding: 8px 0;
+    }
 }
