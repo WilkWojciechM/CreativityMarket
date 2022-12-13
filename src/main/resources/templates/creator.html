@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Creator panel</title>
 </head>
 <body>
-
+<main class="main-content" layout:fragment="content">
+    <p class="notification-bar" th:if="${notification}" th:text="${notification}">
+        Notification
+    </p>
+    <h2 class="list-heading">Creator panel</h2>
+    <ul class="list-border">
+        <li><a href="#" th:href="@{/creator/add-project}">Add project</a></li>
+    </ul>
+</main>
 </body>
 </html>

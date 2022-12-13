@@ -1,41 +1,15 @@
 package com.wilkwm.pracainz.domain.project.dto;
 
-public class ProjectDto {
-    private Long id;
+import org.springframework.web.multipart.MultipartFile;
+
+public class SaveProjectDto {
     private String name;
     private String field;
     private String creator;
     private boolean promoted;
     private String description;
     private String youtubeId;
-    private String projectPic;
-
-    public ProjectDto(Long id, String name, String field, String creator, boolean promoted, String description, String youtubeId, String projectPic) {
-        this.id = id;
-        this.name = name;
-        this.field = field;
-        this.creator = creator;
-        this.promoted = promoted;
-        this.description = description;
-        this.youtubeId = youtubeId;
-        this.projectPic = projectPic;
-    }
-
-    public String getProjectPic() {
-        return projectPic;
-    }
-
-    public void setProjectPic(String projectPic) {
-        this.projectPic = projectPic;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private MultipartFile projectPic;
 
     public String getName() {
         return name;
@@ -69,7 +43,6 @@ public class ProjectDto {
         this.promoted = promoted;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -86,4 +59,11 @@ public class ProjectDto {
         this.youtubeId = youtubeId;
     }
 
+    public MultipartFile getProjectPic() {
+        return projectPic;
+    }
+
+    public void setProjectPic(MultipartFile projectPic) {
+        this.projectPic = projectPic;
+    }
 }

@@ -295,4 +295,33 @@ i powinna zajmować większość dostępnej przestrzeni
         background-color: #ffc107;
         padding: 8px 0;
     }
+
+    .mc-form > input,
+    .mc-form > textarea,
+    .mc-form > button,
+    .mc-form > select { /*dodany selektor*/
+        font-size: 1.2rem;
+        color: black;
+        padding: 8px;
+    }
+    /*Większy checkbox*/
+    .mc-form > input[type=checkbox] {
+        transform: scale(1.5);
+        margin-left: 5px;
+    }
+    /*Biały kolor tekstu przy wyborze pliku*/
+    .mc-form > input[type=file] {
+        color: white;
+    }
+
+    /*Tekst nad formularzem*/
+    .mc-form-message {
+        color: #ffc107;
+        text-align: center;
+    }
+
+    .registration-link {
+        text-align: center;
+        margin-top: 32px;
+    }
 }

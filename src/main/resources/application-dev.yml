@@ -9,3 +9,9 @@ spring:
   h2:
     console:
       enabled: true
+  web:
+      resources:
+        static-locations: classpath:/static/,file:./uploads/
+app:
+      storage:
+        location: ./uploads/

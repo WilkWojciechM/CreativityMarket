@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <title>CreativityMarket</title>
@@ -42,12 +43,17 @@
       <a href="#">Top 10 employers</a>
     </li>
 
-    <li class="menu-item">
-      <a href="#">Log In</a>
+    <li class="menu-item" sec:authorize="hasAnyRole('ADMIN')">
+      <a href="#" th:href="@{/admin}">Admin panel</a>
+    </li>
+
+    <li class="menu-item" sec:authorize="hasAnyRole('CREATOR')">
+      <a href="#" th:href="@{/creator}">Creator panel</a>
     </li>
 
     <li class="menu-item">
-      <a href="#" th:href="@{/admin}">Admin panel</a>
+      <a href="#" th:href="@{/login}" sec:authorize="!isAuthenticated()">Log In</a>
+      <a href="#" th:href="@{/logout}" sec:authorize="isAuthenticated()">Log Out</a>
     </li>
   </ul>
   <header class="MojaDigital">

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Log in !</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+  <h2 class="list-heading">Log in</h2>
+  <form action="" th:action="@{/login}" method="post" class="mc-form">
+
+    <p th:if="${param.error}"
+       th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+       class="mc-form-message">
+      Login error
+    </p>
+    <label for="username">Email</label>
+    <input id="username" name="username" placeholder="Username">
+    <label for="password">Password</label>
+    <input id="password" name="password" placeholder="password" type="password">
+    <button type="submit">Log in</button>
+    <p class="registration-link">You don't have account? <a href="#" th:href="@{/registration}">Register</a></p>
+  </form>
+</main>
+</body>
+</html>

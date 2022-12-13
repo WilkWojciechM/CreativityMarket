@@ -7,11 +7,12 @@ public class ProjectDtoMapper {
         return new ProjectDto(
                 project.getId(),
                 project.getName(),
+                project.getField().getName(),
                 project.getCreator(),
                 project.isPromoted(),
-                project.getField().getName(),
                 project.getDescription(),
-                project.getYoutubeId()
+                project.getYoutubeId(),
+                project.getProjectPic()
         );
     }
 }
