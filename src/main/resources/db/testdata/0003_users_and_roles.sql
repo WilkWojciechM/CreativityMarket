@@ -1,4 +1,4 @@
-insert into user (email, name, password)
+insert into users (email, name, password)
 values
     ('admin@example.com','admin', '{noop}adminpass'),    --1
     ('creator@example.com','creator', '{noop}creatorpass'), --2
