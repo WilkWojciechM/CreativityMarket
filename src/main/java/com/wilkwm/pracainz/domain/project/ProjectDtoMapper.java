@@ -8,7 +8,7 @@ public class ProjectDtoMapper {
                 project.getId(),
                 project.getName(),
                 project.getField().getName(),
-                project.getCreator(),
+                project.getUser().getName(),
                 project.isPromoted(),
                 project.getDescription(),
                 project.getYoutubeId(),

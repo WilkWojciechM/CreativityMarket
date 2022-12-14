@@ -20,8 +20,8 @@
             <option th:each="field: ${field}" th:value="${field.name}" th:text="${field.name}"></option>
         </select>
         <!-- zrobić z tego listę gotowych twórców dla admina -->
-        <label for="creator">Creator</label>
-        <input type="text" id="creator" placeholder="Creator" th:field="*{creator}">
+        <label for="user">Creator</label>
+        <input type="text" id="user" placeholder="Creator" th:field="*{user}">
 
         <label for="promoted" sec:authorize="hasAnyRole('ADMIN')">Promoted?</label>
         <input id="promoted" type="checkbox" th:field="*{promoted}" sec:authorize="hasAnyRole('ADMIN')">

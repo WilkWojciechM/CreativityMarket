@@ -1,8 +1,8 @@
-insert into users (email, password)
+insert into user (email, name, password)
 values
-    ('admin@example.com', '{noop}adminpass'),    --1
-    ('creator@example.com','{noop}creatorpass'), --2
-    ('employer@exmaple.com','{noop}employer'); --3
+    ('admin@example.com','admin', '{noop}adminpass'),    --1
+    ('creator@example.com','creator', '{noop}creatorpass'), --2
+    ('employer@exmaple.com','employer', '{noop}employer'); --3
 
 insert into
     user_role(name, description)

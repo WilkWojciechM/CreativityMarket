@@ -12,7 +12,12 @@
             <column name="name" type="VARCHAR(100)"/>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="youtube_id" type="VARCHAR(20)"/>
-            <column name="creator" type="VARCHAR(100)"/>
+            <column name="user_id" type="BIGINT">
+            <constraints nullable="false"
+                         foreignKeyName="fk_project_user"
+                         referencedTableName="user"
+                         referencedColumnNames="id"/>
+            </column>
             <column name="promoted" type="BOOLEAN"/>
             <column name="project_pic" type="varchar(100)"/>
             <column name="field_id" type="BIGINT">
@@ -20,6 +25,7 @@
                              foreignKeyName="fk_project_field"
                              referencedTableName="field"
                              referencedColumnNames="id"/>
+
             </column>
         </createTable>
     </changeSet>

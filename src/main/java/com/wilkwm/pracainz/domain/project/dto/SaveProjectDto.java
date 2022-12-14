@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class SaveProjectDto {
     private String name;
     private String field;
-    private String creator;
+    private String user;
     private boolean promoted;
     private String description;
     private String youtubeId;
@@ -27,12 +27,12 @@ public class SaveProjectDto {
         this.field = field;
     }
 
-    public String getCreator() {
-        return creator;
+    public String getUser() {
+        return user;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public boolean isPromoted() {

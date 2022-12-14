@@ -5,6 +5,8 @@ import com.wilkwm.pracainz.domain.field.Field;
 import com.wilkwm.pracainz.domain.field.FieldRepository;
 import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
 import com.wilkwm.pracainz.domain.project.dto.SaveProjectDto;
+import com.wilkwm.pracainz.domain.user.User;
+import com.wilkwm.pracainz.domain.user.UserRepository;
 import com.wilkwm.pracainz.storage.FileStorageService;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -15,12 +17,14 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final FieldRepository fieldRepository;
     private final FileStorageService fileStorageService;
+    private  final UserRepository userRepository;
 
 
-    public ProjectService(ProjectRepository projectRepository, FieldRepository fieldRepository, FileStorageService fileStorageService) {
+    public ProjectService(ProjectRepository projectRepository, FieldRepository fieldRepository, FileStorageService fileStorageService, UserRepository userRepository) {
         this.projectRepository = projectRepository;
         this.fieldRepository = fieldRepository;
         this.fileStorageService = fileStorageService;
+        this.userRepository = userRepository;
     }
 
     public List<ProjectDto> findAllPromotedProjects(){
@@ -34,6 +38,11 @@ public class ProjectService {
                 .map(ProjectDtoMapper::map)
                 .toList();
     }
+    public List<ProjectDto> findProjectsByCreatorName(String name) {
+        return projectRepository.findAllByName(name).stream()
+                .map(ProjectDtoMapper::map)
+                .toList();
+    }
 
     public void addProject(SaveProjectDto saveProject) {
         Project project = new Project();
@@ -42,7 +51,10 @@ public class ProjectService {
         Field field = fieldRepository.findByNameIgnoreCase(saveProject.getField()).orElseThrow();
         project.setField(field);
 
-        project.setCreator(saveProject.getCreator());
+        User user = userRepository.findByName(saveProject.getUser()).orElseThrow();
+        project.setUser(user);
+
+
         project.setPromoted(saveProject.isPromoted());
         project.setDescription(saveProject.getDescription());
         project.setYoutubeId(saveProject.getYoutubeId());

@@ -1,6 +1,7 @@
 package com.wilkwm.pracainz.domain.project;
 
 import com.wilkwm.pracainz.domain.field.Field;
+import com.wilkwm.pracainz.domain.user.User;
 
 import javax.persistence.*;
 
@@ -11,7 +12,11 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String creator;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
     private String description;
     private String youtubeId;
     @ManyToOne
@@ -60,12 +65,12 @@ public class Project {
         this.promoted = promoted;
     }
 
-    public String getCreator() {
-        return creator;
+    public User getUser() {
+        return user;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDescription() {

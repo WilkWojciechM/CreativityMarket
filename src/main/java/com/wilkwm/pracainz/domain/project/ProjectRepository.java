@@ -10,5 +10,5 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
     //metoda pozwalajca wyszukać projekty na podstawie dziedziny
     List<Project> findAllByField_NameIgnoreCase(String field);
     //metoda pozwalająca wyszukać projekty na podstawie twórcy
-    List<Project> findAllByCreator(String creator);
+    List<Project> findAllByName(String name);
 }

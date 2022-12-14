@@ -4,17 +4,17 @@ public class ProjectDto {
     private Long id;
     private String name;
     private String field;
-    private String creator;
+    private String user;
     private boolean promoted;
     private String description;
     private String youtubeId;
     private String projectPic;
 
-    public ProjectDto(Long id, String name, String field, String creator, boolean promoted, String description, String youtubeId, String projectPic) {
+    public ProjectDto(Long id, String name, String field, String user, boolean promoted, String description, String youtubeId, String projectPic) {
         this.id = id;
         this.name = name;
         this.field = field;
-        this.creator = creator;
+        this.user = user;
         this.promoted = promoted;
         this.description = description;
         this.youtubeId = youtubeId;
@@ -53,12 +53,12 @@ public class ProjectDto {
         this.field = field;
     }
 
-    public String getCreator() {
-        return creator;
+    public String getUser() {
+        return user;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public boolean isPromoted() {

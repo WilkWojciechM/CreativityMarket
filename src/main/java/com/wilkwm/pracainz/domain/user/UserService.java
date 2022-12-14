@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,13 +25,16 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .map(UserDtoMapper::map);
     }
-    
-
+    public Optional<UserDto> findUserByName(String name) {
+        return userRepository.findByName(name)
+                .map(UserDtoMapper::map);
+    }
     @Transactional
     public void registerUserCeatorRole(UserRegistrationDto userRegistrationDto) {
         UserRole defRole = userRoleRepository.findByName(DEFAULT_USER_ROLE).orElseThrow();
         User user = new User();
         user.setEmail(userRegistrationDto.getEmail());
+        user.setName(userRegistrationDto.getName());
         user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
         user.getRoles().add(defRole);
         userRepository.save(user);
