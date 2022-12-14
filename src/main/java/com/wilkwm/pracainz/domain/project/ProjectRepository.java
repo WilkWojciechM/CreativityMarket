@@ -1,6 +1,7 @@
 package com.wilkwm.pracainz.domain.project;
 
 
+import com.wilkwm.pracainz.domain.user.User;
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
