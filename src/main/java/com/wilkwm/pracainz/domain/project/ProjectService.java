@@ -39,7 +39,7 @@ public class ProjectService {
                 .toList();
     }
     public List<ProjectDto> findProjectsByCreatorName(String name) {
-        return projectRepository.findAllByName(name).stream()
+        return projectRepository.findAllByUser_Name(name).stream()
                 .map(ProjectDtoMapper::map)
                 .toList();
     }
@@ -51,7 +51,7 @@ public class ProjectService {
         Field field = fieldRepository.findByNameIgnoreCase(saveProject.getField()).orElseThrow();
         project.setField(field);
 
-        User user = userRepository.findByName(saveProject.getUser()).orElseThrow();
+        User user = userRepository.findByName(saveProject.getName()).orElseThrow();
         project.setUser(user);
 
 
