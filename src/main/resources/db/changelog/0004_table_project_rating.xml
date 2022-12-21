@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="0004-1" author="wilkmw">
+    <createTable tableName="project_rating">
+        <column name="id" type="bigint" autoIncrement="true">
+            <constraints nullable="false" primaryKey="true"/>
+        </column>
+        <column name="user_id" type="bigint">
+            <constraints nullable="false"
+                         foreignKeyName="fk_project_rating_user_id"
+                         referencedTableName="users"
+                         referencedColumnNames="id"
+                         />
+        </column>
+        <column name="project_id" type="bigint">
+            <constraints nullable="false"
+                         foreignKeyName="fk_project_rating_project_id"
+                         referencedTableName="project"
+                         referencedColumnNames="id"
+                         />
+        </column>
+        <column name="rating" type="int">
+            <constraints nullable="false"></constraints>
+        </column>
+    </createTable>
+        <addUniqueConstraint constraintName="unique_project_rating"
+                             tableName="project_rating"
+                             columnNames="user_id, project_id"/>
+    </changeSet>
+</databaseChangeLog>

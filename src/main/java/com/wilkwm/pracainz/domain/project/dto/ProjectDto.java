@@ -9,8 +9,9 @@ public class ProjectDto {
     private String description;
     private String youtubeId;
     private String projectPic;
+    private  int ratingCount;
 
-    public ProjectDto(Long id, String name, String field, String user, boolean promoted, String description, String youtubeId, String projectPic) {
+    public ProjectDto(Long id, String name, String field, String user, boolean promoted, String description, String youtubeId, String projectPic, int ratingCount) {
         this.id = id;
         this.name = name;
         this.field = field;
@@ -19,6 +20,7 @@ public class ProjectDto {
         this.description = description;
         this.youtubeId = youtubeId;
         this.projectPic = projectPic;
+        this.ratingCount = ratingCount;
     }
 
     public String getProjectPic() {

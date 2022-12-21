@@ -1,9 +1,12 @@
 package com.wilkwm.pracainz.domain.project;
 
 import com.wilkwm.pracainz.domain.field.Field;
+import com.wilkwm.pracainz.domain.rating.Rating;
 import com.wilkwm.pracainz.domain.user.User;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Project {
@@ -22,6 +25,8 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "field_id", referencedColumnName = "id")
     private Field field;
+    @OneToMany(mappedBy = "project")
+    private Set<Rating> ratings = new HashSet<>();
     private boolean promoted;
     private String projectPic;
 
@@ -87,5 +92,13 @@ public class Project {
 
     public void setYoutubeId(String youtubeId) {
         this.youtubeId = youtubeId;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
     }
 }
