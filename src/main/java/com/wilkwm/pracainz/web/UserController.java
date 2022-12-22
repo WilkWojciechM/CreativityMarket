@@ -5,6 +5,8 @@ import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,4 +35,12 @@ private final ProjectService projectService;
         model.addAttribute("projects", projects);
         return "project-listing";
     }
+
+    @GetMapping("/creators")
+    public String getCreatorList(Model model){
+        List<UserDto> users = userService.findAllRegisteredUsers();
+        model.addAttribute("users", users);
+        return "users-listing";
+    }
+
 }

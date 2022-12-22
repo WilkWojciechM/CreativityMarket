@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Service
 public class UserService {
@@ -28,6 +29,12 @@ public class UserService {
     public Optional<UserDto> findUserByName(String name) {
         return userRepository.findByName(name)
                 .map(UserDtoMapper::map);
+    }
+
+    public List<UserDto> findAllRegisteredUsers(){
+        return StreamSupport.stream(userRepository.findAll().spliterator(), false)
+                .map(UserDtoMapper::map)
+                .toList();
     }
     @Transactional
     public void registerUserCeatorRole(UserRegistrationDto userRegistrationDto) {

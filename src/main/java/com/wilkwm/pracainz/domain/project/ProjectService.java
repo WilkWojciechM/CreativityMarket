@@ -8,6 +8,7 @@ import com.wilkwm.pracainz.domain.project.dto.SaveProjectDto;
 import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
 import com.wilkwm.pracainz.storage.FileStorageService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +52,7 @@ public class ProjectService {
         Field field = fieldRepository.findByNameIgnoreCase(saveProject.getField()).orElseThrow();
         project.setField(field);
 
-        User user = userRepository.findByName(saveProject.getName()).orElseThrow();
+        User user = userRepository.findByName(saveProject.getUser()).orElseThrow();
         project.setUser(user);
 
 

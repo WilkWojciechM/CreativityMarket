@@ -88,4 +88,11 @@ public class ProjectDto {
         this.youtubeId = youtubeId;
     }
 
+    public int getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(int ratingCount) {
+        this.ratingCount = ratingCount;
+    }
 }
