@@ -21,16 +21,16 @@
         </select>
 
 
-        <div sec:authorize="hasAnyRole('CREATOR')">
-            <input type="hidden" th:field="*{user}" th:value="${loggedUserName}" />
+         <div sec:authorize="hasAnyRole('CREATOR')">
+             <input type="hidden" th:field="*{user}" th:value="${#authentication.name}" />
         </div>
 
-        <div sec:authorize="hasAnyRole('ADMIN')">
-            <select id="user" th:field="*{user}" required>
-                <option value="" hidden>Choose user</option>
-                <option th:each="user: ${user}" th:value="${user.name}" th:text="${user.name}"></option>
-            </select>
-        </div>
+
+        <select id="user" th:field="*{user}" required sec:authorize="hasAnyRole('ADMIN')">
+            <option value=""hidden>Choose user</option>
+            <option th:each="user: ${user}" th:value="${user.name}" th:text="${user.name}"></option>
+        </select>
+
 
 
         <label for="promoted" sec:authorize="hasAnyRole('ADMIN')">Promoted?</label>

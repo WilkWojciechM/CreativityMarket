@@ -1,5 +1,7 @@
 package com.wilkwm.pracainz.domain.project.dto;
 
+import com.wilkwm.pracainz.domain.field.Field;
+
 public class ProjectDto {
     private Long id;
     private String name;

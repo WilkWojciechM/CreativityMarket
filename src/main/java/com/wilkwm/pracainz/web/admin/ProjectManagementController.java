@@ -6,6 +6,7 @@ import com.wilkwm.pracainz.domain.project.ProjectService;
 import com.wilkwm.pracainz.domain.project.dto.SaveProjectDto;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +39,9 @@ public class ProjectManagementController {
     }
 
     @PostMapping("admin/add-project")
-    public String addProject(SaveProjectDto project, RedirectAttributes redirectAttributes){
+    public String addProject(SaveProjectDto project, Authentication authentication, RedirectAttributes redirectAttributes){
         projectService.addProject(project);
+
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
                 "Project %s saved".formatted(project.getName()));
