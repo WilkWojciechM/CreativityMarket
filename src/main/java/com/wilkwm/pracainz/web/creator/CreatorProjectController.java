@@ -4,38 +4,47 @@ import com.wilkwm.pracainz.domain.field.FieldService;
 import com.wilkwm.pracainz.domain.field.dto.FieldDto;
 import com.wilkwm.pracainz.domain.project.ProjectService;
 import com.wilkwm.pracainz.domain.project.dto.SaveProjectDto;
+import com.wilkwm.pracainz.domain.user.UserService;
+import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import com.wilkwm.pracainz.web.admin.AdminController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CreatorProjectController {
     private final ProjectService projectService;
     private final FieldService fieldService;
 
-    public CreatorProjectController(ProjectService projectService, FieldService fieldService) {
+    private  final UserService userService;
+    public CreatorProjectController(ProjectService projectService, FieldService fieldService, UserService userService) {
         this.projectService = projectService;
         this.fieldService = fieldService;
+        this.userService = userService;
     }
 
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     @GetMapping("/creator/add-project")
-    public String addProjectForm(Model model){
+    public String addProjectForm(Model model, Authentication  authentication){
         List<FieldDto> allField = fieldService.findAllFields();
         model.addAttribute("field",allField);
         SaveProjectDto project = new SaveProjectDto();
+
+        if (authentication != null) {
+            String userEmail = authentication.getName();
+            Optional<UserDto> user = userService.findInfoByEmail(userEmail);
+            String userName = "";
+            if(user.isPresent()) {
+                userName = user.get().getName();
+            }
+            project.setUser(userName);
+        }
         model.addAttribute("project", project);
         return "project-form";
     }

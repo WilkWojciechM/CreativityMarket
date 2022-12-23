@@ -22,7 +22,7 @@
 
 
          <div sec:authorize="hasAnyRole('CREATOR')">
-             <input type="hidden" th:field="*{user}" th:value="${#authentication.name}" />
+             <input type="hidden" th:field="*{user}" th:value="${project.user}" />
         </div>
 
 
