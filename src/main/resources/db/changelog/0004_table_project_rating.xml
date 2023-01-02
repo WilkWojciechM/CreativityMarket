@@ -24,7 +24,7 @@
                          />
         </column>
         <column name="rating" type="int">
-            <constraints nullable="false"></constraints>
+            <constraints nullable="false"/>
         </column>
     </createTable>
         <addUniqueConstraint constraintName="unique_project_rating"

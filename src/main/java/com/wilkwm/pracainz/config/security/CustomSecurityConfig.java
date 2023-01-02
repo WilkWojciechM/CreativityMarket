@@ -19,6 +19,7 @@ class CustomSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
+                        .mvcMatchers("/rate-project").authenticated()
                 .mvcMatchers("/admin/**").hasAnyRole(USER_ROLE, EMPLOYER_ROLE, ADMIN_ROLE)
                 .anyRequest().permitAll()
         )

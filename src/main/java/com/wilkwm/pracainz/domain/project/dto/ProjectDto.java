@@ -11,9 +11,10 @@ public class ProjectDto {
     private String description;
     private String youtubeId;
     private String projectPic;
+    private double avgRating;
     private  int ratingCount;
 
-    public ProjectDto(Long id, String name, String field, String user, boolean promoted, String description, String youtubeId, String projectPic, int ratingCount) {
+    public ProjectDto(Long id, String name, String field, String user, boolean promoted, String description, String youtubeId, String projectPic,double avgRating, int ratingCount) {
         this.id = id;
         this.name = name;
         this.field = field;
@@ -22,6 +23,7 @@ public class ProjectDto {
         this.description = description;
         this.youtubeId = youtubeId;
         this.projectPic = projectPic;
+        this.avgRating = avgRating;
         this.ratingCount = ratingCount;
     }
 
@@ -90,6 +92,14 @@ public class ProjectDto {
         this.youtubeId = youtubeId;
     }
 
+    public double getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(double avgRating) {
+        this.avgRating = avgRating;
+    }
+
     public int getRatingCount() {
         return ratingCount;
     }
@@ -97,4 +107,6 @@ public class ProjectDto {
     public void setRatingCount(int ratingCount) {
         this.ratingCount = ratingCount;
     }
+
+
 }

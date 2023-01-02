@@ -4,9 +4,10 @@ import com.wilkwm.pracainz.domain.project.Project;
 import com.wilkwm.pracainz.domain.project.ProjectRepository;
 import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class RatingService {
 
     private final RatingRepository ratingRepository;
@@ -19,18 +20,18 @@ public class RatingService {
         this.projectRepository = projectRepository;
     }
 
-    public void addRaiting(String user_name, Long project_id, int rating) {
-        Rating ratingSave = ratingRepository.findByUser_NameAndProject_id(user_name, project_id).orElseGet(Rating::new);
-        User user = userRepository.findByName(user_name).orElseThrow();
-        Project project = projectRepository.findById(project_id).orElseThrow();
+    public void addRating(String userEmail, Long projectId, int rating) {
+        Rating ratingSave = ratingRepository.findByUser_EmailAndProject_id(userEmail, projectId).orElseGet(Rating::new);
+        User user = userRepository.findByEmail(userEmail).orElseThrow();
+        Project project = projectRepository.findById(projectId).orElseThrow();
         ratingSave.setUser(user);
         ratingSave.setProject(project);
         ratingSave.setRating(rating);
         ratingRepository.save(ratingSave);
     }
 
-    public Optional<Integer> getUserRating(String user_name, long project_id) {
-        return ratingRepository.findByUser_NameAndProject_id(user_name,project_id)
+    public Optional<Integer> getUserRating(String userEmail, long projectId) {
+        return ratingRepository.findByUser_EmailAndProject_id(userEmail,projectId)
                 .map(Rating::getRating);
     }
 

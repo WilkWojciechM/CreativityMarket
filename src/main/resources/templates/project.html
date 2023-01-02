@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+      layout:decorate="~{layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title th:text="|${project.name} - CreativityMarket|">Project name - CreativityMarket</title>
 </head>
@@ -34,28 +34,41 @@
 
         </div>
 
-        <div class="project-rating-container project-section">
-            <h2 class="project-section-heading">Rating</h2>
-            <div>
-                <p class="project-rating-value" th:text="${avgRating}">4.0</p>
-                <p> Ratings: 189</p>
-            </div>
-            <form action="#" class="project-rating-form">
-                <p>Your rating</p>
-                <input type="hidden" name="projectId">
-                <div class="project-rating-buttons">
-                    <button class="project-rating-button"><i class="fa-solid fa-star"></i></button>
-                    <button class="project-rating-button"><i class="fa-solid fa-star"></i></button>
-                    <button class="project-rating-button"><i class="fa-solid fa-star"></i></button>
-                    <button class="project-rating-button"><i class="fa-solid fa-star"></i></button>
-                    <button class="project-rating-button"><i class="fa-regular fa-star"></i></button>
+            <div class="project-rating-container project-section">
+                <h2 class="project-section">Ocena</h2>
+                <!-- Jeżeli nie oddano żadnego głosu -->
+                <p th:unless="${project.ratingCount}">No votes</p>
+                <!-- Jeżeli oddano głos -->
+                <div th:if="${project.ratingCount}">
+                    <!-- Zaokrąglamy ocenę do 1 miejsca przed i po przecinku -->
+                    <p class="project-rating-value" th:text="${#numbers.formatDecimal(project.avgRating, 1, 1)}">4.0</p>
+                    <p th:text="|Liczba ocen: ${project.ratingCount}|">Liczba ocen: 134</p>
                 </div>
-            </form>
-            <p><a href="#">Log in</a> to rate this project</p>
-        </div>
+                <!-- Dodajemy th:action, formularz wyświetlamy tylko zalogowanemu użytkownikowi -->
+                <form action="#" th:action="@{/rate-project}" method="post"
+                      sec:authorize="isAuthenticated()"
+                      class="project-rating-form">
+                    <!-- Identyfikator filmu, na który głosujemy-->
+                    <p>Do you like it ?</p>
+                    <input type="hidden" name="projectId" th:value="${project.id}">
+                    <div class="project-rating-buttons">
+                        <!-- Generujemy 5 gwiazdek w pętli -->
+                        <button class="project-rating-button"
+                                name="rating"
+                                th:each="i: ${#numbers.sequence(1, 5)}"
+                                th:value="${i}">
+                            <!-- Pełną i pustą gwiazdkę rozróżniamy dodając odpowiednią klasę na podstawie głosu użytkownika -->
+                            <i class="fa-star" th:classappend="${i <= userRating ? 'fa-solid' : 'fa-regular'}"></i>
+                        </button>
+                    </div>
+                </form>
+                <!-- Link do logowania wyświetlamy tylko wtedy, gdy użytkownik nie jest zalogowany -->
+                <p sec:authorize="!isAuthenticated()">
+                    <a href="#" th:href="@{/login}">Log in!</a>
+            </div>
         </section>
 
-        <section class="project-movie-container project-section">
+        <section class="project-project-container project-section">
             <h2 class="project-section-heading">Project trailer</h2>
             <iframe width="560" height="315" class="project-trailer"
                     src="https://www.youtube.com/embed/tgbNymZ7vqY?controls=0"
