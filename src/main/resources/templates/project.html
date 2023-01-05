@@ -35,14 +35,14 @@
         </div>
 
             <div class="project-rating-container project-section">
-                <h2 class="project-section">Ocena</h2>
+                <h2 class="project-section">Rating</h2>
                 <!-- Jeżeli nie oddano żadnego głosu -->
                 <p th:unless="${project.ratingCount}">No votes</p>
                 <!-- Jeżeli oddano głos -->
                 <div th:if="${project.ratingCount}">
                     <!-- Zaokrąglamy ocenę do 1 miejsca przed i po przecinku -->
                     <p class="project-rating-value" th:text="${#numbers.formatDecimal(project.avgRating, 1, 1)}">4.0</p>
-                    <p th:text="|Liczba ocen: ${project.ratingCount}|">Liczba ocen: 134</p>
+                    <p th:text="|Based on: ${project.ratingCount} ratings|">: 134</p>
                 </div>
                 <!-- Dodajemy th:action, formularz wyświetlamy tylko zalogowanemu użytkownikowi -->
                 <form action="#" th:action="@{/rate-project}" method="post"

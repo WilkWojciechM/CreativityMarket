@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:util="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:text="|${commission.name} - CreativityMarket|">Project name - CreativityMarket</title>
+</head>
+
+<body>
+<div class="container">
+    <main class="main-content" layout:fragment="content">
+        <section class="project">
+
+            <div class="project-summary-info">
+                <h1 class="project-summary-title" th:text="${commission.name}">Commission</h1>
+                <p class="project-summary-item">Field: <a href="#"
+                                                          th:href="@{|/field/${commission.field}|}"
+                                                          th:text="${commission.field}"></a>
+                </p>
+
+                <p class="project-summary-item">Creator: <a href="#"
+                                                            th:href="@{|/creator/${commission.user}|}"
+                                                            th:text="${commission.user}"></a></p>
+
+                <p class="commission-summary-item" th:text="${commission.description}">
+                    Description of commission.
+                </p>
+                <p class="commission-summary-item" th:text="${commission.scope}">
+                    Scope of commission.
+                </p>
+                <p class="commission-summary-item" th:text="${commission.timeNeeded}">
+                    Time needed for commission.
+                </p>
+                <p class="commission-summary-item" th:text="${commission.preferredCooperation}">
+                    Preferred cooperation for commission.
+                </p>
+                <p class="project-summary-item">Pricing: <span th:text="${#strings.concat('$', #numbers.formatDecimal(commission.pricingFrom, 2, 2))}">$100.00</span> - <span th:text="${#strings.concat('$', #numbers.formatDecimal(commission.pricingTo, 2, 2))}">$200.00</span></p>
+            </div>
+            <div class="project-section project-availability">
+                <h2 class="project-section-title">Availability</h2>
+                <p th:text="${commission.availability ? 'Available' : 'Not available'}"></p>
+            </div>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <p>CreativityMarket 2022 <i class="fas fa-copyright"></i> Wojciech Wilk </p>
+    </footer>
+</div>
+</body>
+</html>

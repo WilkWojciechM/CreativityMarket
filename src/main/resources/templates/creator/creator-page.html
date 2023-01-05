@@ -5,17 +5,17 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Creator page</title>
+    <title>Creator panel</title>
 </head>
 <body>
 <main class="main-content" layout:fragment="content">
     <p class="notification-bar" th:if="${notification}" th:text="${notification}">
         Notification
     </p>
-    <h2 class="list-heading">Creator panel</h2>
+    <h2 class="list-heading">Creator page</h2>
     <ul class="list-border">
-        <li><a href="#" th:href="@{/creator/add-project}">Add project</a></li>
-        <li><a href="#" th:href="@{/creator/add-commission}">Add commission</a></li>
+        <li><a href="#" th:href="@{/creator/add-project}">Projects list</a></li>
+        <li><a href="#" th:href="@{/creator/add-commission}">Commissions list</a></li>
     </ul>
 </main>
 </body>

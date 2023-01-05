@@ -51,6 +51,10 @@
       <a href="#" th:href="@{/creatorPanel}">Creator panel</a>
     </li>
 
+    <li class="menu-item" sec:authorize="hasAnyRole('CREATOR')">
+      <a href="#" th:href="@{/creatorPage}">Creator page</a>
+    </li>
+
     <li class="menu-item">
       <a href="#" th:href="@{/login}" sec:authorize="!isAuthenticated()">Log In</a>
       <a href="#" th:href="@{/logout}" sec:authorize="isAuthenticated()">Log Out</a>
