@@ -49,15 +49,7 @@ public class CommissionService {
 
     public void addCommission(CommissionDto saveCommission) {
         Commission commission = new Commission();
-        commission.setName(saveCommission.getName());
-
-        commission.setDescription(saveCommission.getDescription());
-        commission.setScope(saveCommission.getScope());
-        commission.setTimeNeeded(saveCommission.getTimeNeeded());
-        commission.setPreferredCooperation(saveCommission.getPreferredCooperation());
-        commission.setPricingFrom(saveCommission.getPricingFrom());
-        commission.setPricingTo(saveCommission.getPricingTo());
-        commission.setAvailability(saveCommission.isAvailability());
+        commissionHandling(saveCommission, commission);
 
         Field field = fieldRepository.findByNameIgnoreCase(saveCommission.getField()).orElseThrow();
         commission.setField(field);
@@ -66,5 +58,27 @@ public class CommissionService {
         commission.setUser(user);
 
         commissionRepository.save(commission);
+    }
+    public void updateCommission(Long id, CommissionDto commissionDto) {
+        Commission commission = commissionRepository.findById(id).orElseThrow();
+        commissionHandling(commissionDto, commission);
+        commission.setField(fieldRepository.findByNameIgnoreCase(commissionDto.getField()).orElseThrow());
+        commissionRepository.save(commission);
+    }
+
+    private void commissionHandling(CommissionDto commissionDto, Commission commission) {
+        commission.setName(commissionDto.getName());
+        commission.setDescription(commissionDto.getDescription());
+        commission.setScope(commissionDto.getScope());
+        commission.setTimeNeeded(commissionDto.getTimeNeeded());
+        commission.setPreferredCooperation(commissionDto.getPreferredCooperation());
+        commission.setPricingFrom(commissionDto.getPricingFrom());
+        commission.setPricingTo(commissionDto.getPricingTo());
+        commission.setAvailability(commissionDto.isAvailability());
+    }
+
+    public void deleteCommission(Long id){
+        //  ratingService.deleteByProjectId(id);
+        commissionRepository.deleteById(id);
     }
 }

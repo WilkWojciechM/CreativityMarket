@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add commission</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+    <h2 class="list-heading">Edit commission</h2>
+    <form action="#" th:action="@{|/creator/edit-commission/${id}|}" method="post" enctype="multipart/form-data" class="mc-form" th:object="${commission}">
+        <input type="hidden" th:field="*{id}" />
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Commission name" th:field="*{name}">
+
+        <label for="description">Description</label>
+        <textarea id="description" rows="6" th:field="*{description}"></textarea>
+
+        <label for="scope">Scope</label>
+        <input type="text" id="scope" placeholder="Scope of work" th:field="*{scope}">
+
+        <label for="timeNeeded">Time needed</label>
+        <input type="text" id="timeNeeded" placeholder="Estimated time needed" th:field="*{timeNeeded}">
+
+        <label for="preferredCooperation">Preferred cooperation</label>
+        <input type="text" id="preferredCooperation" placeholder="Preferred method of cooperation" th:field="*{preferredCooperation}">
+
+        <label for="pricingFrom">Pricing from</label>
+        <input type="number" id="pricingFrom" placeholder="Minimum price" th:field="*{pricingFrom}">
+
+        <label for="pricingTo">Pricing to</label>
+        <input type="number" id="pricingTo" placeholder="Maximum price" th:field="*{pricingTo}">
+
+        <label for="availability">Availability</label>
+        <input type="checkbox" id="availability" th:field="*{availability}">
+
+        <select id="field" required th:field="*{field}">
+            <option value="" hidden>Choose field</option>
+            <option th:each="field: ${field}" th:value="${field.name}" th:text="${field.name}"></option>
+        </select>
+
+        <button type="submit">Save</button>
+    </form>
+</main>
+</body>
+</html>

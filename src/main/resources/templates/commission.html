@@ -42,6 +42,17 @@
                 <h2 class="project-section-title">Availability</h2>
                 <p th:text="${commission.availability ? 'Available' : 'Not available'}"></p>
             </div>
+
+            <div th:if="${userEmail} == ${#authentication.name}">
+                <button type="button" sec:authorize="isAuthenticated()">
+                    <a th:href="@{|/creator/edit-commission/${commission.id}|}">Edit</a>
+                </button>
+            </div>
+            <div th:if="${userEmail} == ${#authentication.name}">
+                <button type="button" sec:authorize="isAuthenticated()">
+                    <a th:href="@{|/creator/delete-commission/${commission.id}|}">Delete</a>
+                </button>
+            </div>
         </section>
 
     </main>
