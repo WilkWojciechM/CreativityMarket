@@ -66,6 +66,16 @@
                 <p sec:authorize="!isAuthenticated()">
                     <a href="#" th:href="@{/login}">Log in!</a>
             </div>
+            <div th:if="${userEmail} == ${#authentication.name}">
+                <button type="button" sec:authorize="isAuthenticated()">
+                    <a th:href="@{|/creator/edit-project/${project.id}|}">Edit</a>
+                </button>
+            </div>
+            <div th:if="${userEmail} == ${#authentication.name}">
+                <button type="button" sec:authorize="isAuthenticated()">
+                    <a th:href="@{|/creator/delete-project/${project.id}|}">Delete</a>
+                </button>
+            </div>
         </section>
 
         <section class="project-project-container project-section">

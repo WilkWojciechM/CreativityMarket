@@ -21,6 +21,7 @@
                          foreignKeyName="fk_project_rating_project_id"
                          referencedTableName="project"
                          referencedColumnNames="id"
+                         deleteCascade="true"
                          />
         </column>
         <column name="rating" type="int">

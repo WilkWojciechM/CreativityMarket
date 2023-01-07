@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<body>
+<div class="container">
+    <main class="main-content" layout:fragment="content">
+        <!--Nagłówek pobierany z modelu-->
+        <h2 class="list-heading" th:text="${heading}">Commission list</h2>
+        <!-- Opis pobieramy z modelu -->
+        <p class="list-description" th:text="${description}">Opis sekcji, przykładowy</p>
+        <!-- Zostawiamy tylko pierwszy element <li> -->
+        <ul class="project-list" th:remove="all-but-first">
+            <!-- Pętla po wszystkich projektach z modelu -->
+            <li class="project-list-item" th:each="commission: ${commissions}">
+                <!-- Link do strony pojedynczego projektu typu /project/5 -->
+                <a href="#" th:href="@{|/commission/${commission.id}|}">
+                </a>
+                <div class="project-list-item-card">
+                    <div class="project-list-item-content">
+                        <h3 class="project-list-item-title">
+                            <a href="#" th:href="@{|/commission/${commission.id}|}" th:text="${commission.name}">Commission name</a>
+                        </h3>
+                        <h4>
+                            <a href="#" th:href="@{|/creator/${commission.user}|}" th:text="${commission.user}">Creator</a>
+                        </h4>
+                        <h4>
+                            <a href="#" th:href="@{|/creator/${commission.scope}|}" th:text="${commission.scope}">Scope</a>
+                        </h4>
+                    </div>
+                </div>
+        </ul>
+    </main>
+</div>
+</body>
+</html>

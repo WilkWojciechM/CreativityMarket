@@ -5,10 +5,10 @@ import com.wilkwm.pracainz.domain.field.Field;
 import com.wilkwm.pracainz.domain.field.FieldRepository;
 import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
 import com.wilkwm.pracainz.domain.project.dto.SaveProjectDto;
+import com.wilkwm.pracainz.domain.rating.RatingService;
 import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
 import com.wilkwm.pracainz.storage.FileStorageService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +19,7 @@ public class ProjectService {
     private final FieldRepository fieldRepository;
     private final FileStorageService fileStorageService;
     private  final UserRepository userRepository;
+  //  private final RatingService ratingService;
 
 
     public ProjectService(ProjectRepository projectRepository, FieldRepository fieldRepository, FileStorageService fileStorageService, UserRepository userRepository) {
@@ -65,5 +66,24 @@ public class ProjectService {
             project.setProjectPic(savedFileName);
         }
         projectRepository.save(project);
+    }
+
+    public void updateProject(Long id, SaveProjectDto projectDto) {
+        Project project = projectRepository.findById(id).orElseThrow();
+        project.setName(projectDto.getName());
+        project.setDescription(projectDto.getDescription());
+        project.setYoutubeId(projectDto.getYoutubeId());
+        project.setField(fieldRepository.findByNameIgnoreCase(projectDto.getField()).orElseThrow());
+        project.setPromoted(projectDto.isPromoted());
+        if (projectDto.getProjectPic() != null) {
+            String savedFileName = fileStorageService.saveImage(projectDto.getProjectPic());
+            project.setProjectPic(savedFileName);
+        }
+        projectRepository.save(project);
+    }
+
+    public void deleteProject(Long id){
+      //  ratingService.deleteByProjectId(id);
+        projectRepository.deleteById(id);
     }
 }

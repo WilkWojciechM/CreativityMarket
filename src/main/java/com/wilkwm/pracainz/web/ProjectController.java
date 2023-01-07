@@ -4,6 +4,7 @@ import com.wilkwm.pracainz.domain.project.ProjectService;
 import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
 import com.wilkwm.pracainz.domain.rating.RatingService;
 import com.wilkwm.pracainz.domain.user.UserService;
+import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,12 @@ public class ProjectController {
     private final ProjectService projectService;
     private final RatingService ratingService;
 
-    public ProjectController(ProjectService projectService, RatingService ratingService) {
+    private final UserService userService;
+
+    public ProjectController(ProjectService projectService, RatingService ratingService, UserService userService) {
         this.projectService = projectService;
         this.ratingService = ratingService;
+        this.userService = userService;
     }
 
     @GetMapping("/project/{id}")
@@ -29,6 +33,10 @@ public class ProjectController {
         ProjectDto project = projectService.findProjectById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("project", project);
+
+        UserDto user = userService.findUserByName(project.getUser()).orElseThrow();
+        model.addAttribute("userEmail",user.getEmail());
+
         if(authentication != null) {
             String userEmail = authentication.getName();
             Integer rating = ratingService.getUserRating(userEmail, id).orElse(0);

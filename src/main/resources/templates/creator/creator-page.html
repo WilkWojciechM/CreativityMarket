@@ -14,8 +14,18 @@
     </p>
     <h2 class="list-heading">Creator page</h2>
     <ul class="list-border">
-        <li><a href="#" th:href="@{/creator/add-project}">Projects list</a></li>
-        <li><a href="#" th:href="@{/creator/add-commission}">Commissions list</a></li>
+        <li th:if="${name != null}">
+            <a href="#" th:href="@{|/creator/${name}/project-list|}">Projects list</a>
+        </li>
+        <li  th:if="${name == null}">
+            <a href="#" th:href="@{|/creator/project-list|}">Projects list</a>
+        </li>
+        <li th:if="${name != null}">
+        <a href="#" th:href="@{|/creator/${name}/commission-list|}">Commissions list</a>
+        </li>
+        <li  th:if="${name == null}">
+            <a href="#" th:href="@{|/creator/commission-list|}">Projects list</a>
+        </li>
     </ul>
 </main>
 </body>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Add project</title>
+</head>
+<body></body>
+<main class="main-content" layout:fragment="content">
+    <h2 class="list-heading">Edit project</h2>
+    <form action="#" th:action="@{|/creator/edit-project/${id}|}" method="post" enctype="multipart/form-data" class="mc-form" th:object="${project}">
+        <input type="hidden" th:field="*{id}" />
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Example name" th:field="*{name}">
+
+        <label for="promoted" sec:authorize="hasAnyRole('ADMIN')">Promoted?</label>
+        <input id="promoted" type="checkbox" th:field="*{promoted}" sec:authorize="hasAnyRole('ADMIN')">
+
+        <label for="description" >Description</label>
+        <textarea id="description"  rows="6" th:field="*{description}"></textarea>
+
+        <label for="youtubeId">Youtube movie link</label>
+        <input type="text" id="youtubeId" placeholder="youtube link" th:field="*{youtubeId}">
+
+        <label for="projectPic">Project Picture</label>
+        <input type="file" id="projectPic" th:field="*{projectPic}" accept="image/png, image/jpeg">
+
+        <select id="field" required th:field="*{field}">
+            <option value="" hidden>Choose field</option>
+            <option th:each="field: ${field}" th:value="${field.name}" th:text="${field.name}"></option>
+        </select>
+
+        <button type="submit">Save</button>
+    </form>
+</main>
+</body>
+</html>

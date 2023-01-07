@@ -24,6 +24,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         List<ProjectDto> promotedProject = projectService.findAllPromotedProjects();
+
         model.addAttribute("heading", "Promoted projects");
         model.addAttribute("description", "Top rated projects by our freelancers");
         model.addAttribute("projects", promotedProject);
