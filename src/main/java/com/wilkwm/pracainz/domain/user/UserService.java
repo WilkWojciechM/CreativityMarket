@@ -12,7 +12,6 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class UserService {
-    private static final String DEFAULT_USER_ROLE = "CREATOR";
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
@@ -22,29 +21,35 @@ public class UserService {
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
     public Optional<UserDto> findInfoByEmail(String email) {
         return userRepository.findByEmail(email)
                 .map(UserDtoMapper::map);
     }
+
     public Optional<UserDto> findUserByName(String name) {
         return userRepository.findByName(name)
                 .map(UserDtoMapper::map);
     }
 
-    public List<UserDto> findAllRegisteredUsers(){
+    public List<UserDto> findAllRegisteredUsers() {
         return StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .map(UserDtoMapper::map)
                 .toList();
     }
+
     @Transactional
-    public void registerUserCeatorRole(UserRegistrationDto userRegistrationDto) {
-        UserRole defRole = userRoleRepository.findByName(DEFAULT_USER_ROLE).orElseThrow();
-        User user = new User();
-        user.setEmail(userRegistrationDto.getEmail());
-        user.setName(userRegistrationDto.getName());
-        user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
-        user.getRoles().add(defRole);
-        userRepository.save(user);
+    public void registerUser(UserRegistrationDto userRegistrationDto, String roleName) {
+        Optional<UserRole> role = userRoleRepository.findByName(roleName);
+        if (role.isPresent()) {
+            User user = new User();
+            user.setEmail(userRegistrationDto.getEmail());
+            user.setName(userRegistrationDto.getName());
+            user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
+            user.getRoles().add(role.get());
+            userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("Invalid role name: " + roleName);
+        }
     }
 }
-

@@ -17,6 +17,15 @@
       <input id="name" type="text" placeholder="Username" th:field="*{name}">
       <label for="password">Password</label>
       <input id="password" placeholder="password" type="password" th:field="*{password}">
+      <label for="isEmployer">
+        <input type="radio" id="isEmployer" name="userType" value="employer" required checked>
+        Are you looking for professional help with your project and want to post a job offer? Become an EMPLOYER
+      </label>
+
+      <label for="isCreator">
+        <input type="radio" id="isCreator" name="userType" value="creator" required>
+        Are you looking for a platform to publish your profile and find job offer or advertise yourself? Become a CREATOR
+      </label>
       <button type="submit">Register</button>
     </form>
   </main>
