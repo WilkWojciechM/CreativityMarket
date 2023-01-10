@@ -5,23 +5,29 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Creator page</title>
+    <title>Creator panel</title>
 </head>
 <body>
+<div class="container">
 <main class="main-content" layout:fragment="content">
     <p class="notification-bar" th:if="${notification}" th:text="${notification}">
         Notification
     </p>
-    <h2 class="list-heading">Creator panel</h2>
+    <h2 class="list-heading">Creator page</h2>
 
     <h2 class="list-heading" th:text="${heading}">Promoted projects</h2>
+    <!-- Opis pobieramy z modelu -->
 
     <p class="list-description" th:text="${description}">Opis sekcji, przykładowy</p>
     <ul class="list-border">
-        <li><a href="#" th:href="@{/creator/add-project}">Add project</a></li>
-        <li><a href="#" th:href="@{/creator/add-commission}">Add commission</a></li>
-        <li><a href="#" th:href="@{/favorite-projects}">Favorite list</a></li>
+        <li th:if="${name != null}">
+            <a href="#" th:href="@{|/employer/${name}/commission-list|}">Commissions list</a>
+        </li>
+        <li  th:if="${name == null}">
+            <a href="#" th:href="@{|/employer/commission-list|}">Commission list</a>
+        </li>
     </ul>
 </main>
+</div>
 </body>
 </html>

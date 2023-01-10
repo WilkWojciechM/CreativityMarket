@@ -8,11 +8,17 @@
     <title>Creator panel</title>
 </head>
 <body>
+<div class="container">
 <main class="main-content" layout:fragment="content">
     <p class="notification-bar" th:if="${notification}" th:text="${notification}">
         Notification
     </p>
+
     <h2 class="list-heading">Creator page</h2>
+
+    <h2 class="list-heading" th:text="${heading}">Promoted projects</h2>
+    <!-- Opis pobieramy z modelu -->
+    <p class="list-description" th:text="${description}">Opis sekcji, przykładowy</p>
     <ul class="list-border">
         <li th:if="${name != null}">
             <a href="#" th:href="@{|/creator/${name}/project-list|}">Projects list</a>
@@ -27,6 +33,8 @@
             <a href="#" th:href="@{|/creator/commission-list|}">Commission list</a>
         </li>
     </ul>
+
 </main>
+    </div>
 </body>
 </html>

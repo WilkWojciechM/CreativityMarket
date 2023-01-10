@@ -76,6 +76,16 @@
                     <a th:href="@{|/creator/delete-project/${project.id}|}">Delete</a>
                 </button>
             </div>
+
+            <form th:action="@{/add-to-favorites}" method="post">
+                <input type="hidden" name="projectId" th:value="${project.id}"/>
+                <button type="submit" sec:authorize="isAuthenticated()">Add to favorites</button>
+            </form>
+
+
+
+
+
         </section>
 
         <section class="project-project-container project-section">

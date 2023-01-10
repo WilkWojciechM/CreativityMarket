@@ -55,6 +55,14 @@
       <a href="#" th:href="@{/creatorPage}">Creator page</a>
     </li>
 
+    <li class="menu-item" sec:authorize="hasAnyRole('EMPLOYER')">
+      <a href="#" th:href="@{/employerPanel}">Employer panel</a>
+    </li>
+
+    <li class="menu-item" sec:authorize="hasAnyRole('EMPLOYER')">
+      <a href="#" th:href="@{/employerPage}">Employer page</a>
+    </li>
+
     <li class="menu-item">
       <a href="#" th:href="@{/login}" sec:authorize="!isAuthenticated()">Log In</a>
       <a href="#" th:href="@{/logout}" sec:authorize="isAuthenticated()">Log Out</a>

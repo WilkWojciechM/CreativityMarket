@@ -1,5 +1,7 @@
 package com.wilkwm.pracainz.web;
 
+import com.wilkwm.pracainz.domain.favoritePList.FavoriteProjectService;
+import com.wilkwm.pracainz.domain.project.Project;
 import com.wilkwm.pracainz.domain.project.ProjectService;
 import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
 import com.wilkwm.pracainz.domain.rating.RatingService;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -36,9 +39,10 @@ public class ProjectController {
 
         UserDto user = userService.findUserByName(project.getUser()).orElseThrow();
         model.addAttribute("userEmail",user.getEmail());
+        String userEmail = authentication.getName();
 
         if(authentication != null) {
-            String userEmail = authentication.getName();
+            userEmail = authentication.getName();
             Integer rating = ratingService.getUserRating(userEmail, id).orElse(0);
             model.addAttribute("userRating", rating);
 

@@ -6,7 +6,6 @@ import com.wilkwm.pracainz.domain.project.ProjectService;
 import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
-import org.hibernate.query.criteria.internal.expression.AbstractTupleElement;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.ManyToOne;
 import java.util.List;
 
 @Controller
@@ -66,6 +64,10 @@ private final CommissionService commissionService;
 
     @GetMapping("creator/commission-list")
     public String getCurrentLoggedCreatorCommissionList(Model model, Authentication authentication) {
+        return getCommissionList(model, authentication);
+    }
+
+    private String getCommissionList(Model model, Authentication authentication) {
         String userEmail = authentication.getName();
         UserDto user = userService.findInfoByEmail(userEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<CommissionDto> commissions = commissionService.findCommissionsByCreatorName(user.getName());
@@ -77,12 +79,26 @@ private final CommissionService commissionService;
 
     @GetMapping("creator/{name}/commission-list")
     public String getCreatorCommissionList(@PathVariable String name, Model model) {
+        return getNameCommissionList(name, model);
+    }
+
+    private String getNameCommissionList(@PathVariable String name, Model model) {
         UserDto user = userService.findUserByName(name).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<CommissionDto> commissions = commissionService.findCommissionsByCreatorName(name);
         model.addAttribute("heading", user.getName());
         model.addAttribute("description", user.getEmail());
         model.addAttribute("commissions", commissions);
         return "commission-listing";
+    }
+
+    @GetMapping("employer/commission-list")
+    public String getCurrentLoggedEmployerCommissionList(Model model, Authentication authentication) {
+        return getCommissionList(model, authentication);
+    }
+
+    @GetMapping("employer/{name}/commission-list")
+    public String getEmployerCommissionList(@PathVariable String name, Model model) {
+        return getNameCommissionList(name, model);
     }
 
     @GetMapping("/creators")

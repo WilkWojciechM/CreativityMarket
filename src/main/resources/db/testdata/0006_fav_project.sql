@@ -1,0 +1,1 @@
+INSERT INTO favorite_project (user_id, project_id) VALUES (1, 1), (1, 2), (2, 1), (1,3);
