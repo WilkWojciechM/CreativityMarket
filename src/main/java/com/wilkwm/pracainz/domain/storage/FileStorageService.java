@@ -1,4 +1,4 @@
-package com.wilkwm.pracainz.storage;
+package com.wilkwm.pracainz.domain.storage;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;

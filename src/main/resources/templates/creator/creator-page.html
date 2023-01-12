@@ -2,6 +2,7 @@
 <html lang="en"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
@@ -33,6 +34,12 @@
             <a href="#" th:href="@{|/creator/commission-list|}">Commission list</a>
         </li>
     </ul>
+    <div th:if="${user.getEmail()} != ${#authentication.name}">
+        <form th:action="@{/add-to-favorite-users}" method="post">
+            <input type="hidden" name="favoriteUserEmail" th:value="${user.getEmail()}"/>
+            <button type="submit" sec:authorize="isAuthenticated()">Add to favorites</button>
+        </form>
+    </div>
 
 </main>
     </div>

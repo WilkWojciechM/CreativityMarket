@@ -1,4 +1,4 @@
-package com.wilkwm.pracainz.domain.favoritePList;
+package com.wilkwm.pracainz.domain.favoriteProject;
 
 import com.wilkwm.pracainz.domain.project.Project;
 import com.wilkwm.pracainz.domain.user.User;

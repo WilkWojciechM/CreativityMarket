@@ -4,6 +4,8 @@ import com.wilkwm.pracainz.domain.commission.CommissionService;
 import com.wilkwm.pracainz.domain.commission.dto.CommissionDto;
 import com.wilkwm.pracainz.domain.project.ProjectService;
 import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
+import com.wilkwm.pracainz.domain.user.User;
+import com.wilkwm.pracainz.domain.user.UserRole;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -22,6 +25,7 @@ public class UserController {
 private final UserService userService;
 private final ProjectService projectService;
 private final CommissionService commissionService;
+
     public UserController(UserService userService, ProjectService projectService, CommissionService commissionService) {
         this.userService = userService;
         this.projectService = projectService;
@@ -35,6 +39,7 @@ private final CommissionService commissionService;
         model.addAttribute("heading", user.getName());
         model.addAttribute("description", user.getEmail());
         model.addAttribute("projects", projects);
+        model.addAttribute("user", user);
 
     }
     @GetMapping("/creator/{name}")
@@ -108,4 +113,13 @@ private final CommissionService commissionService;
         return "users-listing";
     }
 
+
+    @GetMapping("/user/{id}")
+    public String showUser(@PathVariable Long id, Model model) {
+        User user = userService.findUserById(id).orElseThrow();
+        Set<String> roleNames = userService.findUserRoles(id);
+        model.addAttribute("user", user);
+        model.addAttribute("userRoleNames", roleNames);
+        return "users-listing";
+    }
 }

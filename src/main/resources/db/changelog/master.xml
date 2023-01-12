@@ -11,6 +11,8 @@
         <include file="0004_table_project_rating.xml" relativeToChangelogFile="true" />
         <include file="0005_creator_table_commission.xml" relativeToChangelogFile="true"/>
         <include file="0006_user_fav_table.xml" relativeToChangelogFile="true" />
+        <include file="0007_fav_users_table.xml" relativeToChangelogFile="true"/>
+        <include file="0008_create_message_table.xml" relativeToChangelogFile="true"/>
 
 
         <!-- TEST DATA -->
@@ -19,5 +21,7 @@
         <include file="../testdata/0002_project.sql" relativeToChangelogFile="true" context="dev"/>
         <include file="../testdata/0004_project_rating.sql" relativeToChangelogFile="true" context="dev" />
         <include file="../testdata/0005_commission.sql" relativeToChangelogFile="true" context="dev" />
-        <include file="../testdata/0006_fav_project.sql" relativeToChangelogFile="true" context="deb" />
+        <include file="../testdata/0006_fav_project.sql" relativeToChangelogFile="true" context="dev" />
+        <include file="../testdata/0007_fav_users.sql" relativeToChangelogFile="true" context="dev" />
+        <include file="../testdata/0008_message.sql" relativeToChangelogFile="true" context="dev" />
 </databaseChangeLog>

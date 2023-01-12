@@ -4,27 +4,34 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
-    <changeSet id="0007-1" author="wilkmw">
-        <createTable tableName="favorite_users">
+    <changeSet id="0008-1" author="wilkmw">
+        <createTable tableName="messages">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="user_id" type="bigint">
+            <column name="sender_id" type="bigint">
                 <constraints nullable="false"
-                             foreignKeyName="fk_users_favorite_user_id"
+                             foreignKeyName="fk_messages_sender_id"
                              referencedTableName="users"
                              referencedColumnNames="id"
                 />
             </column>
-            <column name="favorite_user_id" type="bigint">
+            <column name="receiver_id" type="bigint">
                 <constraints nullable="false"
-                             foreignKeyName="fk_users_favorite_favorite_user_id"
+                             foreignKeyName="fk_messages_receiver_id"
                              referencedTableName="users"
                              referencedColumnNames="id"
-                             deleteCascade="true"
                 />
+            </column>
+            <column name="content" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="read" type="boolean">
+                <constraints nullable="false"/>
             </column>
         </createTable>
-        <addUniqueConstraint constraintName="uq_favorite_users" tableName="favorite_users" columnNames="user_id, favorite_user_id"/>
     </changeSet>
 </databaseChangeLog>

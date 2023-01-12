@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CreatorController {
-    @GetMapping("/creatorPanel")
+    @GetMapping("/creator-panel")
     public String getCreatorPanel(){
         return "creator/creatorPanel";
     }
 
-    @GetMapping("/creatorPage")
+    @GetMapping("/creator-page")
     public String getCreatorPage(){return "creator/creator-page";}
 }

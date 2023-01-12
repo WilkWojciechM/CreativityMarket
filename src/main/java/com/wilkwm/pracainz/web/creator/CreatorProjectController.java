@@ -57,7 +57,7 @@ public class CreatorProjectController {
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
                 "Project %s saved".formatted(project.getName()));
-        return "redirect:/creatorPanel";
+        return "redirect:/creator-panel";
     }
 
     @GetMapping("/creator/edit-project/{id}")
@@ -82,7 +82,7 @@ public class CreatorProjectController {
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
                 "Project %s updated".formatted(project.getName()));
-        return "redirect:/creatorPanel";
+        return "redirect:/creator-panel";
     }
 
     @GetMapping("/creator/delete-project/{id}")
@@ -94,12 +94,12 @@ public class CreatorProjectController {
             redirectAttributes.addFlashAttribute(
                     AdminController.NOTIFICATION_ATTRIBUTE,
                     "You are not authorized to delete this project.");
-            return "redirect:/creatorPanel";
+            return "redirect:/creator-panel";
         }
         projectService.deleteProject(id);
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
                 "Project %s deleted".formatted(project.getName()));
-        return "redirect:/creatorPanel";
+        return "redirect:/creator-panel";
     }
 }

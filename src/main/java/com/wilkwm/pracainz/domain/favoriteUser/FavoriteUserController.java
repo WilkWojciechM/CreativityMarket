@@ -1,10 +1,8 @@
-package com.wilkwm.pracainz.domain.favoritePList;
+package com.wilkwm.pracainz.domain.favoriteUser;
 
-
-import com.wilkwm.pracainz.domain.project.Project;
 import com.wilkwm.pracainz.domain.user.User;
+import com.wilkwm.pracainz.domain.user.UserRole;
 import com.wilkwm.pracainz.domain.user.UserService;
-import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,41 +13,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-
 @Controller
-public class FavoriteProjectController {
-    private final FavoriteProjectService favoriteProjectService;
+public class FavoriteUserController {
+    private final FavoriteUserService favoriteUserService;
     private final UserService userService;
 
-    public FavoriteProjectController(FavoriteProjectService favoriteProjectService, UserService userService) {
-        this.favoriteProjectService = favoriteProjectService;
+    public FavoriteUserController(FavoriteUserService favoriteUserService, UserService userService) {
+        this.favoriteUserService = favoriteUserService;
         this.userService = userService;
     }
-    @PostMapping("/add-to-favorites")
-    public String addToFavorites(@RequestParam long projectId,
+
+    @PostMapping("/add-to-favorite-users")
+    public String addToFavorites(@RequestParam String favoriteUserEmail,
                                  @RequestHeader String referer,
                                  Authentication authentication) {
         String userEmail = authentication.getName();
-        favoriteProjectService.addToFavorites(userEmail, projectId);
+        favoriteUserService.addToFavorites(userEmail, favoriteUserEmail);
         return "redirect:" + referer;
     }
 
-    @PostMapping("/remove-from-favorites")
-    public String removeFromFavorites(@RequestParam long projectId,
+    @PostMapping("/remove-from-favorite-users")
+    public String removeFromFavorites(@RequestParam String favoriteUserEmail,
                                       @RequestHeader String referer,
                                       Authentication authentication) {
         String userEmail = authentication.getName();
-        favoriteProjectService.removeFromFavorites(userEmail, projectId);
+        favoriteUserService.removeFromFavorites(userEmail, favoriteUserEmail);
         return "redirect:" + referer;
     }
 
-    @GetMapping("/favorite-projects")
-    public String getFavoriteProjects(Model model, Authentication authentication) {
+    @GetMapping("/favorite-users")
+    public String getFavoriteUsers(Model model, Authentication authentication) {
         String userEmail = authentication.getName();
 
-        List<Project> favoriteProjects = favoriteProjectService.getFavoriteProjects(userEmail);
-        model.addAttribute("favoriteProjects", favoriteProjects);
-        return "favorite-projects";
-    }
+        List<User> favoriteUsers = favoriteUserService.getFavoriteUsers(userEmail);
+        model.addAttribute("favoriteUsers", favoriteUsers);
 
+        return "favorite-users";
+    }
 }

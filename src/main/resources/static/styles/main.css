@@ -219,20 +219,27 @@ i powinna zajmować większość dostępnej przestrzeni
         max-width: 200px;
     }
     /*Karta filmu*/
-    .project-item-card {
+    .project-list-item-card {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         padding: 16px;
     }
-    .project-item-content > * {
+    .project-list-item-content > * {
         margin: 8px 0;
+    }
+    .project-list-item-title {
+        font-size: 1.6rem;
     }
     .project-item-title {
         font-size: 1.6rem;
     }
-    .project-item-rating {
+    .project-list-item-rating {
         font-size: 1.6rem;
+    }
+    .project-list-item-poster {
+        display: block;
+        max-width: 200px;
     }
     /*Listing END*/
 
@@ -276,14 +283,7 @@ i powinna zajmować większość dostępnej przestrzeni
     .mc-form > * {
         margin-top: 8px;
     }
-    /*większe inputy z paddingami*/
-    .mc-form > input,
-    .mc-form > textarea,
-    .mc-form > button {
-        font-size: 1.2rem;
-        color: black;
-        padding: 8px;
-    }
+
     .mc-form > button {
         margin-top: 16px;
         background-color: white;
@@ -323,5 +323,85 @@ i powinna zajmować większość dostępnej przestrzeni
     .registration-link {
         text-align: center;
         margin-top: 32px;
+    }
+    .notification-bar {
+        text-align: center;
+        background-color: #ffc107;
+        padding: 8px 0;
+    }
+
+    .registration-link {
+        text-align: center;
+        margin-top: 32px;
+    }
+
+    /*Responsive*/
+    @media only screen and (min-width: 992px) {
+        /*Na ekranie powyżej 992px ukrywamy przycisk do rozwijania menu*/
+        .menu-toggle {
+            display: none;
+        }
+
+        /*Elementy menu nie powinny już zajmować całej szerokości, tylko być obok siebie*/
+        .menu-item {
+            display: block;
+            width: auto;
+            border-bottom: 0;
+        }
+
+        /*Kontener z logo powinien być rozciągnięty, a nawigacja po prawej stronie*/
+        .menu-logo-container {
+            flex: 1;
+        }
+
+        /*Na dużym ekranie ograniczamy szerokość do 960px*/
+        .main-content,
+        .menu {
+            align-self: center;
+            width: 960px;
+        }
+    }
+    /*Responsive movie.html*/
+    @media only screen and (min-width: 992px) {
+        /*Dodajemy rozkład elastyczny, elementy będą wyświetlane w jednym wierszu*/
+        .project {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /*Przyciski powinny wyświetlać się obok siebie, bez zawijania wiersza*/
+        .project {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+        /*Większe odstępy między przyciskami*/
+        .project-rating-button {
+            font-size: 1.2rem;
+            margin: 0 4px;
+        }
+    }
+    /*messages*/
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        color: #5c5c5c;
+        background-color: #1c1c1c;
+    }
+
+    th, td {
+        border: 1px solid #5c5c5c;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #333333;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #282828;
     }
 }

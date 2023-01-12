@@ -20,9 +20,9 @@
                     <a href="#" th:href="@{|/project/${project.id}|}">
                         <!-- Po uruchomieniu aplikacji ścieżka do placeholdera plakatu wygląda nieco inaczej -->
                         <img src="../static/img/poster-placeholder.png"
-                             th:src="@{/img/poster-placeholder.png}"
-                             alt="Project name"
-                             class="project-list-item-poster">
+                             th:src="${project.projectPic != null} ? '/img/' + ${project.projectPic} : '/img/poster-placeholder.png'"
+                             alt="project title"
+                             class="project-list-item-image">
                     </a>
                     <div class="project-list-item-card">
                         <div class="project-list-item-content">

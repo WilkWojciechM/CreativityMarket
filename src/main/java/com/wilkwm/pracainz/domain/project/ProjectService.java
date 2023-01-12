@@ -5,10 +5,9 @@ import com.wilkwm.pracainz.domain.field.Field;
 import com.wilkwm.pracainz.domain.field.FieldRepository;
 import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
 import com.wilkwm.pracainz.domain.project.dto.SaveProjectDto;
-import com.wilkwm.pracainz.domain.rating.RatingService;
 import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
-import com.wilkwm.pracainz.storage.FileStorageService;
+import com.wilkwm.pracainz.domain.storage.FileStorageService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -83,7 +82,6 @@ public class ProjectService {
     }
 
     public void deleteProject(Long id){
-      //  ratingService.deleteByProjectId(id);
         projectRepository.deleteById(id);
     }
 }

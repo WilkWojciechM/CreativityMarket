@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div class="container">
+    <main class="main-content" layout:fragment="content">
+
+        <h2 class="list-heading">My favorite users</h2>
+        <ul class="user-list" th:remove="all-but-first">
+            <li class="user-list-item" th:each="user: ${favoriteUsers}">
+                <div class="user-list-item-card">
+                    <div class="user-list-item-content">
+                        <h3 class="user-list-item-name">
+                            <a href="#" th:href="@{|/user/${user.id}|}" th:text="${user.name}">User name</a>
+                            <h4>
+                            <ul>
+                                <li th:each="role : ${user.roles}"><span th:text="'User role: ' + ${role.name}"></span></li>
+                            </ul>
+                            </h4>
+                        </h3>
+                    </div>
+                    <form th:action="@{/remove-from-favorite-users}" method="post">
+                        <input type="hidden" name="favoriteUserEmail" th:value="${user.getEmail()}"/>
+                        <button type="submit" sec:authorize="isAuthenticated()">Remove from favorites</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </main>
+</div>
+</body>
+</html>

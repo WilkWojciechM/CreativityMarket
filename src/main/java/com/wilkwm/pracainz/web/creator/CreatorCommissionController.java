@@ -56,7 +56,7 @@ public class CreatorCommissionController {
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
                 "Commission %s saved".formatted(commission.getName()));
-        return "redirect:/creatorPanel";
+        return "redirect:/creator-panel";
     }
 
     @GetMapping("/creator/edit-commission/{id}")
@@ -76,7 +76,7 @@ public class CreatorCommissionController {
 
         commissionService.updateCommission(id, commission);
         redirectAttributes.addFlashAttribute("notification", "Commission updated successfully.");
-        return "redirect:/creatorPanel";
+        return "redirect:/creator-panel";
     }
 
     @GetMapping("/creator/delete-commission/{id}")
@@ -88,13 +88,13 @@ public class CreatorCommissionController {
             redirectAttributes.addFlashAttribute(
                     AdminController.NOTIFICATION_ATTRIBUTE,
                     "You are not authorized to delete this project.");
-            return "redirect:/creatorPage";
+            return "redirect:/creator-page";
         }
         commissionService.deleteCommission(id);
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
                 "Project %s deleted".formatted(commission.getName()));
-        return "redirect:/creatorPage";
+        return "redirect:/creator-page";
     }
 
 

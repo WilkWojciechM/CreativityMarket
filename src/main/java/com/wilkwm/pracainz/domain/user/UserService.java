@@ -6,8 +6,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -37,6 +40,20 @@ public class UserService {
                 .map(UserDtoMapper::map)
                 .toList();
     }
+
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public Set<String> findUserRoles(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.map(User::getRoles)
+                .orElse(Collections.emptySet())
+                .stream()
+                .map(UserRole::getName)
+                .collect(Collectors.toSet());
+    }
+
 
     @Transactional
     public void registerUser(UserRegistrationDto userRegistrationDto, String roleName) {

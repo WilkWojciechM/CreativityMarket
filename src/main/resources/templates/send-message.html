@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Message</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+    <h2 class="list-heading">Send a message</h2>
+    <form action="#" th:action="@{/send-message}" method="post" class="mc-form" enctype="multipart/form-data" th:object="${message}">
+        <input type="hidden" id="sender" name="sender" th:value="${message.sender.name}"/>
+
+        <label for="receiver">To</label>
+        <select id="receiver" name="receiver" th:field="*{receiver}">
+            <option value="" hidden>Choose user</option>
+            <option th:each="user: ${allUsers}" th:value="${user.name}" th:text="${user.name}"></option>
+        </select>
+
+        <label for="content">Message</label>
+        <textarea id="content" rows="6" name="content" th:field="*{content}"></textarea>
+
+        <button type="submit">Send</button>
+    </form>
+</main>
+</body>
+</html>

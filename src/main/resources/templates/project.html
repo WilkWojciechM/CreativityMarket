@@ -12,10 +12,10 @@
     <main class="main-content" layout:fragment="content">
         <section class="project">
             <div class="project-summary">
-                <img src="../static/img/poster-placeholder.png"
+                <img th:if="${project.projectPic}" th:src="@{|/img/${project.projectPic}|}"
+                     src="../static/img/poster-placeholder.png"
                      alt="project name"
-                     class="project-summary-cover"
-                />
+                     class="project-summary-cover">
             </div>
         <div class="project-summary-info">
             <h1 class="project-summary-title" th:text="${project.name}">Project name</h1>
@@ -66,23 +66,25 @@
                 <p sec:authorize="!isAuthenticated()">
                     <a href="#" th:href="@{/login}">Log in!</a>
             </div>
-            <div th:if="${userEmail} == ${#authentication.name}">
-                <button type="button" sec:authorize="isAuthenticated()">
-                    <a th:href="@{|/creator/edit-project/${project.id}|}">Edit</a>
-                </button>
+
+            <div sec:authorize="isAuthenticated()">
+                <div th:if="${userEmail} == ${#authentication.name}">
+                    <button type="button" sec:authorize="isAuthenticated()">
+                        <a th:href="@{|/creator/edit-project/${project.id}|}">Edit</a>
+                    </button>
+                </div>
+                <div th:if="${userEmail} == ${#authentication.name}">
+                    <button type="button" sec:authorize="isAuthenticated()">
+                        <a th:href="@{|/creator/delete-project/${project.id}|}">Delete</a>
+                    </button>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <form th:action="@{/add-to-favorites}" method="post">
+                        <input type="hidden" name="projectId" th:value="${project.id}"/>
+                        <button type="submit">Add to favorites</button>
+                    </form>
+                </div>
             </div>
-            <div th:if="${userEmail} == ${#authentication.name}">
-                <button type="button" sec:authorize="isAuthenticated()">
-                    <a th:href="@{|/creator/delete-project/${project.id}|}">Delete</a>
-                </button>
-            </div>
-
-            <form th:action="@{/add-to-favorites}" method="post">
-                <input type="hidden" name="projectId" th:value="${project.id}"/>
-                <button type="submit" sec:authorize="isAuthenticated()">Add to favorites</button>
-            </form>
-
-
 
 
 

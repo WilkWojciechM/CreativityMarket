@@ -1,4 +1,4 @@
-package com.wilkwm.pracainz.domain.favoritePList;
+package com.wilkwm.pracainz.domain.favoriteProject;
 
 import com.wilkwm.pracainz.domain.project.Project;
 import com.wilkwm.pracainz.domain.project.ProjectRepository;
@@ -7,7 +7,6 @@ import com.wilkwm.pracainz.domain.user.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

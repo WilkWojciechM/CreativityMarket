@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Messages</title>
+</head>
+<body>
+<div class="container">
+    <main class="main-content" layout:fragment="content">
+        <h2>Messages</h2>
+        <div th:if="${messages.size() > 0}">
+            <table>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Content</th>
+
+                </tr>
+                <tr th:each="message : ${messages}">
+                    <td th:text="${message.sender}"></td>
+                    <td th:text="${message.receiver}"></td>
+                    <td th:text="${message.content}"></td>
+                <!--    <td th:text="${#dates.format(message.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td> -->
+                </tr>
+            </table>
+        </div>
+        <div th:if="${messages.size() == 0}">
+            <p>No messages found</p>
+        </div>
+    </main>
+</div>
+</body>
+</html>
