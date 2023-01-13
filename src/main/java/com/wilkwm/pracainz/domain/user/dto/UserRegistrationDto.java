@@ -4,6 +4,15 @@ public class UserRegistrationDto {
     String email;
     String name;
     String password;
+    String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getEmail() {
         return email;

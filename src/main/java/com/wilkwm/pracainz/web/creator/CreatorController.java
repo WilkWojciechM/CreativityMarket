@@ -12,4 +12,5 @@ public class CreatorController {
 
     @GetMapping("/creator-page")
     public String getCreatorPage(){return "creator/creator-page";}
+
 }

@@ -56,17 +56,15 @@ public class UserService {
 
 
     @Transactional
-    public void registerUser(UserRegistrationDto userRegistrationDto, String roleName) {
-        Optional<UserRole> role = userRoleRepository.findByName(roleName);
-        if (role.isPresent()) {
+    public void registerUser(UserRegistrationDto userRegistrationDto) {
+
             User user = new User();
             user.setEmail(userRegistrationDto.getEmail());
             user.setName(userRegistrationDto.getName());
             user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
-            user.getRoles().add(role.get());
+            UserRole role = userRoleRepository.findByName(userRegistrationDto.getRole()).orElseThrow();
+            user.getRoles().add(role);
             userRepository.save(user);
-        } else {
-            throw new IllegalArgumentException("Invalid role name: " + roleName);
-        }
+
     }
 }

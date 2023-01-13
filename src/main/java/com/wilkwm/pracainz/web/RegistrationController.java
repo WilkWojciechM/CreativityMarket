@@ -19,23 +19,14 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new UserRegistrationDto());
+        UserRegistrationDto userRegistration = new UserRegistrationDto();
+        model.addAttribute("user",userRegistration);
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registerUser(@ModelAttribute UserRegistrationDto userRegistrationDto,
-                               @RequestParam(value = "isEmployer", required = false) boolean isEmployer,
-                               @RequestParam(value = "isCreator", required = false) boolean isCreator,
-                               Model model) {
-        if (isEmployer) {
-            userService.registerUser(userRegistrationDto, "EMPLOYER");
-        } else if (isCreator) {
-            userService.registerUser(userRegistrationDto, "CREATOR");
-        } else {
-            model.addAttribute("error", "You must select a role");
-            return "registration";
-        }
+    public String registerUser(UserRegistrationDto userRegistrationDto) {
+        userService.registerUser(userRegistrationDto);
         return "redirect:/login";
     }
 }

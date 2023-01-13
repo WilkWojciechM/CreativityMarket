@@ -34,6 +34,7 @@
             <a href="#" th:href="@{|/creator/commission-list|}">Commission list</a>
         </li>
     </ul>
+
     <div th:if="${user.getEmail()} != ${#authentication.name}">
         <form th:action="@{/add-to-favorite-users}" method="post">
             <input type="hidden" name="favoriteUserEmail" th:value="${user.getEmail()}"/>

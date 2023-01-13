@@ -5,7 +5,6 @@ import com.wilkwm.pracainz.domain.commission.dto.CommissionDto;
 import com.wilkwm.pracainz.domain.project.ProjectService;
 import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
 import com.wilkwm.pracainz.domain.user.User;
-import com.wilkwm.pracainz.domain.user.UserRole;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import org.springframework.http.HttpStatus;
@@ -14,9 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -36,6 +38,7 @@ private final CommissionService commissionService;
 
         UserDto user = userService.findUserByName(name).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<ProjectDto> projects = projectService.findProjectsByCreatorName(name);
+
         model.addAttribute("heading", user.getName());
         model.addAttribute("description", user.getEmail());
         model.addAttribute("projects", projects);
@@ -43,11 +46,18 @@ private final CommissionService commissionService;
 
     }
     @GetMapping("/creator/{name}")
-    public String getCreator(@PathVariable String name, Model model) {
-
+    public String getCreator(@PathVariable String name, Model model, Authentication authentication) {
+            getUser(name, model);
+        return "creator/creator-page";
+    }
+    @GetMapping("/creator/self")
+    public String getCreatorSelf(Model model, Authentication authentication) {
+        UserDto user = userService.findInfoByEmail(authentication.getName()).orElseThrow();
+        String name = user.getName();
         getUser(name, model);
         return "creator/creator-page";
     }
+
 
     @GetMapping("creator/{name}/project-list")
     public String getCreatorProjectList(@PathVariable String name, Model model, Authentication authentication) {

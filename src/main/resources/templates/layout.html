@@ -52,7 +52,7 @@
     </li>
 
     <li class="menu-item" sec:authorize="hasAnyRole('CREATOR')">
-      <a href="#" th:href="@{/creator-page}">Creator page</a>
+      <a href="#" th:href="@{/creator/self}">Creator page</a>
     </li>
 
     <li class="menu-item" sec:authorize="hasAnyRole('EMPLOYER')">
@@ -60,7 +60,7 @@
     </li>
 
     <li class="menu-item" sec:authorize="hasAnyRole('EMPLOYER')">
-      <a href="#" th:href="@{/employerPage}">Employer page</a>
+      <a href="#" th:href="@{/employer/self}">Employer page</a>
     </li>
 
     <li class="menu-item">
