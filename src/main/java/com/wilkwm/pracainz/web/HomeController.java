@@ -23,11 +23,11 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        List<ProjectDto> promotedProject = projectService.findAllPromotedProjects();
+        List<ProjectDto> projects = projectService.findAllProjects();
 
         model.addAttribute("heading", "Promoted projects");
         model.addAttribute("description", "Top rated projects by our freelancers");
-        model.addAttribute("projects", promotedProject);
+        model.addAttribute("projects", projects);
         return "project-listing";
     }
 }

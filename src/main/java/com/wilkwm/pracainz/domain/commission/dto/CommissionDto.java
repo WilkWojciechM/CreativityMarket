@@ -6,27 +6,31 @@ public class CommissionDto {
     private Long id;
     private String name;
     private String description;
-    private String scope;
     private String timeNeeded;
     private String preferredCooperation;
     private BigDecimal pricingFrom;
     private BigDecimal pricingTo;
     private boolean availability;
+    private boolean jobOffer;
+
+
+
     private String user;
     private String field;
 
-    public CommissionDto(Long id, String name, String description, String scope, String timeNeeded, String preferredCooperation, BigDecimal pricingFrom, BigDecimal pricingTo, boolean availability, String user, String field) {
+    public CommissionDto(Long id, String name, String description, String timeNeeded, String preferredCooperation, BigDecimal pricingFrom, BigDecimal pricingTo, boolean availability, boolean jobOffer, String user, String field) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.scope = scope;
         this.timeNeeded = timeNeeded;
         this.preferredCooperation = preferredCooperation;
         this.pricingFrom = pricingFrom;
         this.pricingTo = pricingTo;
         this.availability = availability;
+        this.jobOffer = jobOffer;
         this.user = user;
         this.field = field;
+
     }
     public CommissionDto(){};
 
@@ -52,14 +56,6 @@ public class CommissionDto {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getScope() {
-        return scope;
-    }
-
-    public void setScope(String scope) {
-        this.scope = scope;
     }
 
     public String getTimeNeeded() {
@@ -100,6 +96,14 @@ public class CommissionDto {
 
     public void setAvailability(boolean availability) {
         this.availability = availability;
+    }
+
+    public boolean isJobOffer() {
+        return jobOffer;
+    }
+
+    public void setJobOffer(boolean jobOffer) {
+        this.jobOffer = jobOffer;
     }
 
     public String getUser() {

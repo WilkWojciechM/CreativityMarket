@@ -58,6 +58,14 @@ private final CommissionService commissionService;
         return "creator/creator-page";
     }
 
+    @GetMapping("/employer/self")
+    public String getCEmployerSelf(Model model, Authentication authentication) {
+        UserDto user = userService.findInfoByEmail(authentication.getName()).orElseThrow();
+        String name = user.getName();
+        getUser(name, model);
+        return "employer/employer-page";
+    }
+
 
     @GetMapping("creator/{name}/project-list")
     public String getCreatorProjectList(@PathVariable String name, Model model, Authentication authentication) {

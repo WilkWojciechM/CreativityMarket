@@ -4,8 +4,6 @@ import com.wilkwm.pracainz.domain.commission.CommissionService;
 import com.wilkwm.pracainz.domain.commission.dto.CommissionDto;
 import com.wilkwm.pracainz.domain.field.FieldService;
 import com.wilkwm.pracainz.domain.field.dto.FieldDto;
-import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
-import com.wilkwm.pracainz.domain.project.dto.SaveProjectDto;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import com.wilkwm.pracainz.web.admin.AdminController;
@@ -37,7 +35,7 @@ public class CreatorCommissionController {
         List<FieldDto> allField = fieldService.findAllFields();
         model.addAttribute("field",allField);
         CommissionDto commission = new CommissionDto();
-
+        commission.setJobOffer(false);
         if (authentication != null) {
             String userEmail = authentication.getName();
             Optional<UserDto> user = userService.findInfoByEmail(userEmail);
@@ -48,7 +46,7 @@ public class CreatorCommissionController {
             commission.setUser(userName);
         }
         model.addAttribute("commission", commission);
-        return "commission-form";
+        return "commission-creator-form";
     }
     @PostMapping("/creator/add-commission")
     public String addCommission(CommissionDto commission, RedirectAttributes redirectAttributes){

@@ -12,7 +12,7 @@
   <form action="" th:action="@{/login}" method="post" class="mc-form">
 
     <p th:if="${param.error}"
-       th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+       th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message} ? 'Inncorrect username or password' : '' "
        class="mc-form-message">
       Login error
     </p>

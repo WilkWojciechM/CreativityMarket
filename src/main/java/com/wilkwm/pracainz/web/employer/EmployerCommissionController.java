@@ -35,7 +35,7 @@ public class EmployerCommissionController {
         List<FieldDto> allField = fieldService.findAllFields();
         model.addAttribute("field",allField);
         CommissionDto commission = new CommissionDto();
-
+        commission.setJobOffer(true);
         if (authentication != null) {
             String userEmail = authentication.getName();
             Optional<UserDto> user = userService.findInfoByEmail(userEmail);
@@ -46,11 +46,13 @@ public class EmployerCommissionController {
             commission.setUser(userName);
         }
         model.addAttribute("commission", commission);
-        return "commission-form";
+        return "commission-employer-form";
     }
     @PostMapping("/employer/add-commission")
     public String addCommission(CommissionDto commission, RedirectAttributes redirectAttributes){
+        commission.setJobOffer(true);
         commissionService.addCommission(commission);
+        System.out.println(commission.isJobOffer());
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
                 "Commission %s saved".formatted(commission.getName()));

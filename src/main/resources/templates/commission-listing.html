@@ -10,8 +10,11 @@
         <!--Nagłówek pobierany z modelu-->
         <h2 class="list-heading" th:text="${heading}">Commission list</h2>
         <!-- Opis pobieramy z modelu -->
-        <p class="list-description" th:text="${description}">Opis sekcji, przykładowy</p>
-        <!-- Zostawiamy tylko pierwszy element <li> -->
+        <p class="list-description" th:text="${description}"></p>
+
+            <input type="submit" value="Search" />
+        </form>
+
         <ul class="project-list" th:remove="all-but-first">
             <!-- Pętla po wszystkich projektach z modelu -->
             <li class="project-list-item" th:each="commission: ${commissions}">
@@ -27,7 +30,7 @@
                             <a href="#" th:href="@{|/creator/${commission.user}|}" th:text="${commission.user}">Creator</a>
                         </h4>
                         <h4>
-                            <a href="#" th:href="@{|/creator/${commission.scope}|}" th:text="${commission.scope}">Scope</a>
+                           <div th:text="${commission.field}">Field</div>
                         </h4>
                     </div>
                 </div>

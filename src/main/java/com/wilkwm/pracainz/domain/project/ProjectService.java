@@ -28,8 +28,8 @@ public class ProjectService {
         this.userRepository = userRepository;
     }
 
-    public List<ProjectDto> findAllPromotedProjects(){
-        return projectRepository.findAllByPromotedIsTrue().stream().map(ProjectDtoMapper::map).toList();
+    public List<ProjectDto> findAllProjects(){
+        return projectRepository.findAll().stream().map(ProjectDtoMapper::map).toList();
     }
     public Optional<ProjectDto> findProjectById(long id) {
         return projectRepository.findById(id).map(ProjectDtoMapper::map);

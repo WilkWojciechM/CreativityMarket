@@ -20,12 +20,13 @@ public class Commission {
     private User user;
 
     private String description;
-    private String scope;
     private String timeNeeded;
     private String preferredCooperation;
     private BigDecimal pricingFrom;
     private BigDecimal pricingTo;
     private boolean availability;
+    private boolean jobOffer;
+
 
     @ManyToOne
     @JoinColumn(name = "field_id", referencedColumnName = "id")
@@ -61,14 +62,6 @@ public class Commission {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getScope() {
-        return scope;
-    }
-
-    public void setScope(String scope) {
-        this.scope = scope;
     }
 
     public String getTimeNeeded() {
@@ -118,4 +111,12 @@ public class Commission {
     public void setField(Field field) {
         this.field = field;
     }
+    public boolean isJobOffer() {
+        return jobOffer;
+    }
+
+    public void setJobOffer(boolean jobOffer) {
+        this.jobOffer = jobOffer;
+    }
+
 }

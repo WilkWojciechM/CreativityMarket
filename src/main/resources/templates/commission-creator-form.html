@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add commission</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+    <h2 class="list-heading">Add commission</h2>
+    <form action="#" th:action="@{/creator/add-commission}" method="post" enctype="multipart/form-data" class="mc-form" th:object="${commission}">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Example name" th:field="*{name}">
+
+        <label for="description" >Description</label>
+        <textarea id="description" rows="6" th:field="*{description}"></textarea>
+
+        <label for="timeNeeded">Time needed  (in days)</label>
+        <input type="text" id="timeNeeded" placeholder="Time needed" th:field="*{timeNeeded}">
+
+        <label for="preferredCooperation">Preferred cooperation</label>
+        <input type="text" id="preferredCooperation" placeholder="Preferred cooperation" th:field="*{preferredCooperation}">
+
+        <label for="pricingFrom">Pricing from  (in dollars)</label>
+        <input type="number" id="pricingFrom" placeholder="Pricing from" th:field="*{pricingFrom}">
+
+        <label for="pricingTo">Pricing to  (in dollars)</label>
+        <input type="number" id="pricingTo" placeholder="Pricing to" th:field="*{pricingTo}">
+
+        <label for="availability">Availability</label>
+        <input id="availability" type="checkbox" th:field="*{availability}">
+
+        <div sec:authorize="hasAnyRole('CREATOR')">
+            <input type="hidden" th:field="*{user}" th:value="${commission.user}" />
+        </div>
+
+        <select id="field" required th:field="*{field}">
+            <option value="" hidden>Choose field</option>
+            <option th:each="field: ${field}" th:value="${field.name}" th:text="${field.name}"></option>
+        </select>
+
+        <button type="submit">Add</button>
+    </form>
+</main>
+</body>
+</html>

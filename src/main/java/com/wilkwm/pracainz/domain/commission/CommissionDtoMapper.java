@@ -9,12 +9,12 @@ public class CommissionDtoMapper {
                 commission.getId(),
                 commission.getName(),
                 commission.getDescription(),
-                commission.getScope(),
                 commission.getTimeNeeded(),
                 commission.getPreferredCooperation(),
                 commission.getPricingFrom(),
                 commission.getPricingTo(),
                 commission.isAvailability(),
+                commission.isJobOffer(),
                 commission.getUser().getName(),
                 commission.getField().getName()
         );

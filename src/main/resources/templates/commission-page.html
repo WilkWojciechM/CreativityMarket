@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Commissions</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+    <p class="notification-bar" th:if="${notification}" th:text="${notification}">
+        Notification
+    </p>
+    <h2 class="list-heading">
+        Are you looking for a job offer or an offer from a creator? </h2>
+
+    <ul class="list-border">
+        <li><a href="#" th:href="@{/creator-commissions}">Offer from creator</a></li>
+        <li><a href="#" th:href="@{/employer-commissions}">Job offer</a> </li>
+    </ul>
+</main>
+</body>
+</html>

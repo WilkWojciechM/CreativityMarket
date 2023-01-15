@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -47,6 +48,14 @@ public class CommissionService {
                 .toList();
     }
 
+    public List<CommissionDto> findAllAvailableCommissionsByEmployer(){
+        return commissionRepository.findAllByAvailabilityIsTrueAndJobOfferIsTrue().stream().map(CommissionDtoMapper::map).toList();
+    }
+
+    public List<CommissionDto> findAllAvailableCommissionsByCreator(){
+        return commissionRepository.findAllByAvailabilityIsTrueAndJobOfferIsFalse().stream().map(CommissionDtoMapper::map).toList();
+    }
+
     public void addCommission(CommissionDto saveCommission) {
         Commission commission = new Commission();
         commissionHandling(saveCommission, commission);
@@ -69,12 +78,12 @@ public class CommissionService {
     private void commissionHandling(CommissionDto commissionDto, Commission commission) {
         commission.setName(commissionDto.getName());
         commission.setDescription(commissionDto.getDescription());
-        commission.setScope(commissionDto.getScope());
         commission.setTimeNeeded(commissionDto.getTimeNeeded());
         commission.setPreferredCooperation(commissionDto.getPreferredCooperation());
         commission.setPricingFrom(commissionDto.getPricingFrom());
         commission.setPricingTo(commissionDto.getPricingTo());
         commission.setAvailability(commissionDto.isAvailability());
+        commission.setJobOffer(commissionDto.isJobOffer());
     }
 
     public void deleteCommission(Long id){

@@ -35,16 +35,12 @@
       <a href="#" th:href="@{/fields}">Field of work</a>
     </li>
 
-    <li class="menu-item">
-      <a href="#">Top 10 projects</a>
-    </li>
-
-    <li class="menu-item">
-      <a href="#">Top 10 employers</a>
-    </li>
-
     <li class="menu-item" sec:authorize="hasAnyRole('ADMIN')">
       <a href="#" th:href="@{/admin}">Admin panel</a>
+    </li>
+
+    <li class="menu-item">
+      <a href="#" th:href="@{/commission-page}">Available commissions</a>
     </li>
 
     <li class="menu-item" sec:authorize="hasAnyRole('CREATOR')">

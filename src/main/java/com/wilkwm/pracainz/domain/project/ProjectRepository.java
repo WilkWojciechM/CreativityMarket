@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface ProjectRepository extends CrudRepository<Project, Long> {
     List<Project> findAllByPromotedIsTrue();
 
+    List<Project> findAll();
+
     Optional<Project> findByUser_Email(String userEmail);
 
     //metoda pozwalajca wyszukać projekty na podstawie dziedziny

@@ -2,6 +2,7 @@ package com.wilkwm.pracainz.web;
 
 import com.wilkwm.pracainz.domain.commission.CommissionService;
 import com.wilkwm.pracainz.domain.commission.dto.CommissionDto;
+import com.wilkwm.pracainz.domain.user.UserRoleRepository;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import org.springframework.http.HttpStatus;
@@ -17,10 +18,13 @@ import java.util.List;
 public class CommissionController {
     private final CommissionService commissionService;
     private final UserService userService;
+    private final UserRoleRepository userRoleRepository;
 
-    public CommissionController(CommissionService commissionService, UserService userService) {
+
+    public CommissionController(CommissionService commissionService, UserService userService, UserRoleRepository userRoleRepository) {
         this.commissionService = commissionService;
         this.userService = userService;
+        this.userRoleRepository = userRoleRepository;
     }
 
     @GetMapping("/commission/{id}")
@@ -33,10 +37,22 @@ public class CommissionController {
         return "commission";
     }
 
-    @GetMapping("/commissions")
-    public String getCommissionList(Model model){
-        List<CommissionDto> commissions = commissionService.findAllCommissions();
+    @GetMapping("commission-page")
+    public String getCommissionPage(){
+        return "commission-page";
+    }
+
+    @GetMapping("/creator-commissions")
+    public String getCreatorCommissionList(Model model){
+        List<CommissionDto> commissions = commissionService.findAllAvailableCommissionsByCreator();
         model.addAttribute("commissions", commissions);
+        return "commission-listing";
+    }
+
+    @GetMapping("/employer-commissions")
+    public String getEmployerCommissionList(Model model){
+        List<CommissionDto> commissions = commissionService.findAllAvailableCommissionsByEmployer();
+        model.addAttribute("commissions",commissions);
         return "commission-listing";
     }
 }

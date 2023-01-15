@@ -9,7 +9,7 @@
     <div class="container">
         <main class="main-content" layout:fragment="content">
             <!--Nagłówek pobierany z modelu-->
-            <h2 class="list-heading" th:text="${heading}">Promoted projects</h2>
+            <h2 class="list-heading" th:text="${heading}">Our Creators projects</h2>
             <!-- Opis pobieramy z modelu -->
             <p class="list-description" th:text="${description}">Opis sekcji, przykładowy</p>
             <!-- Zostawiamy tylko pierwszy element <li> -->
@@ -31,6 +31,9 @@
                             </h3>
                             <h4>
                                 <a href="#" th:href="@{|/creator/${project.user}|}" th:text="${project.user}">Creator</a>
+                            </h4>
+                            <h4>
+                                <a href ="#" th:href="@{|/field/${project.field}|}" th:text="${project.field}">Field</a>
                             </h4>
                         </div>
                         <div class="project-list-item-rating">

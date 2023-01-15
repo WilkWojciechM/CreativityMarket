@@ -11,12 +11,12 @@
             </column>
             <column name="name" type="VARCHAR(100)"/>
             <column name="description" type="VARCHAR(1000)"/>
-            <column name="scope" type="VARCHAR(1000)"/>
             <column name="time_needed" type="VARCHAR(100)"/>
             <column name="preferred_cooperation" type="VARCHAR(100)"/>
             <column name="pricing_from" type="DECIMAL(10,2)"/>
             <column name="pricing_to" type="DECIMAL(10,2)"/>
             <column name="availability" type="BOOLEAN"/>
+            <column name="job_offer" type="BOOLEAN" />
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"
                              foreignKeyName="fk_commission_user"

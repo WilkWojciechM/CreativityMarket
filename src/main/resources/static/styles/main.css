@@ -405,4 +405,28 @@ i powinna zajmować większość dostępnej przestrzeni
         background-color: #282828;
     }
 
+    #field option {
+        color: black;
+
+}
+    #receiver option {
+        color: black;
+    }
+
+    .custom-button {
+        background-color: #333; /* dark grey */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: all 0.2s ease-in-out;
+        text-decoration: none;
+    }
+
+    .custom-button:hover {
+        background-color: #444; /* slightly darker grey */
+        transform: scale(1.1);
+    }
 }

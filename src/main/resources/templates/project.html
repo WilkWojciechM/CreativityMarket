@@ -69,19 +69,19 @@
 
             <div sec:authorize="isAuthenticated()">
                 <div th:if="${userEmail} == ${#authentication.name}">
-                    <button type="button" sec:authorize="isAuthenticated()">
+                    <button type="button" class="custom-button" sec:authorize="isAuthenticated()">
                         <a th:href="@{|/creator/edit-project/${project.id}|}">Edit</a>
                     </button>
                 </div>
                 <div th:if="${userEmail} == ${#authentication.name}">
-                    <button type="button" sec:authorize="isAuthenticated()">
+                    <button type="button" class="custom-button" sec:authorize="isAuthenticated()">
                         <a th:href="@{|/creator/delete-project/${project.id}|}">Delete</a>
                     </button>
                 </div>
                 <div sec:authorize="isAuthenticated()">
                     <form th:action="@{/add-to-favorites}" method="post">
                         <input type="hidden" name="projectId" th:value="${project.id}"/>
-                        <button type="submit">Add to favorites</button>
+                        <button type="submit" class="custom-button">Add to favorites</button>
                     </form>
                 </div>
             </div>
