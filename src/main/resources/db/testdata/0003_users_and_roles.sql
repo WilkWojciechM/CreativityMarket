@@ -1,6 +1,6 @@
 insert into users (email, name, password)
 values
-    ('admin@example.com','admin', '{noop}adminpass'),    --1
+    ('johnDoe@example.com','johnTheCreator', '{noop}pass'),    --1
     ('creator@example.com','creator', '{noop}creatorpass'), --2
     ('employer@example.com','employer', '{noop}employerpass'); --3
 
@@ -14,6 +14,6 @@ values
 insert into
     user_roles(user_id, role_id)
 values
-    (1, 1),
+    (1, 2),
     (2, 2),
     (3, 3);

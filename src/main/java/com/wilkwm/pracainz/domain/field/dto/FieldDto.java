@@ -11,7 +11,6 @@ public class FieldDto {
         this.description = description;
     }
 
-    //bezparametrowy konstruktor do połaczenia obiektu z formularzem
     public FieldDto(){
     }
 

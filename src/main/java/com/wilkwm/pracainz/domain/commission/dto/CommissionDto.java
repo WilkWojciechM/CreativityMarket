@@ -6,7 +6,7 @@ public class CommissionDto {
     private Long id;
     private String name;
     private String description;
-    private String timeNeeded;
+    private Integer timeNeeded;
     private String preferredCooperation;
     private BigDecimal pricingFrom;
     private BigDecimal pricingTo;
@@ -18,7 +18,7 @@ public class CommissionDto {
     private String user;
     private String field;
 
-    public CommissionDto(Long id, String name, String description, String timeNeeded, String preferredCooperation, BigDecimal pricingFrom, BigDecimal pricingTo, boolean availability, boolean jobOffer, String user, String field) {
+    public CommissionDto(Long id, String name, String description, Integer timeNeeded, String preferredCooperation, BigDecimal pricingFrom, BigDecimal pricingTo, boolean availability, boolean jobOffer, String user, String field) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -58,11 +58,11 @@ public class CommissionDto {
         this.description = description;
     }
 
-    public String getTimeNeeded() {
+    public  Integer getTimeNeeded() {
         return timeNeeded;
     }
 
-    public void setTimeNeeded(String timeNeeded) {
+    public void setTimeNeeded(Integer timeNeeded) {
         this.timeNeeded = timeNeeded;
     }
 

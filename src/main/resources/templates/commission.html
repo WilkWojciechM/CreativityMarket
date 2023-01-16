@@ -13,43 +13,53 @@
     <main class="main-content" layout:fragment="content">
         <section class="project">
 
-            <div class="project-summary-info">
-                <h1 class="project-summary-title" th:text="${commission.name}">Commission</h1>
-                <p class="project-summary-item">Field: <a href="#"
-                                                          th:href="@{|/field/${commission.field}|}"
-                                                          th:text="${commission.field}"></a>
-                </p>
 
-                <p class="project-summary-item">Creator: <a href="#"
-                                                            th:href="@{|/creator/${commission.user}|}"
-                                                            th:text="${commission.user}"></a></p>
+            <div class="commission-summary-frame">
+                <div class="commission-summary-info">
+                    <h1 class="commission-summary-title" th:text="${commission.name}">Commission</h1>
+                    <p class="commission-summary-item">Field: <a class="highlighted" href="#"
+                                                                 th:href="@{|/field/${commission.field}|}"
+                                                                 th:text="${commission.field}"></a>
+                    </p>
 
-                <p class="commission-summary-item" th:text="${commission.description}">
-                    Description of commission.
-                </p>
-                <p class="commission-summary-item" th:text="${commission.timeNeeded}">
-                    Time needed for commission.
-                </p>
-                <p class="commission-summary-item" th:text="${commission.preferredCooperation}">
-                    Preferred cooperation for commission.
-                </p>
-                <p class="project-summary-item">Pricing: <span th:text="${#strings.concat('$', #numbers.formatDecimal(commission.pricingFrom, 2, 2))}">$100.00</span> - <span th:text="${#strings.concat('$', #numbers.formatDecimal(commission.pricingTo, 2, 2))}">$200.00</span></p>
-            </div>
-            <div class="project-section project-availability">
-                <h2 class="project-section-title">Availability</h2>
-                <p th:text="${commission.availability ? 'Available' : 'Not available'}"></p>
-            </div>
+                    <p class="commission-summary-item">Creator: <a class="highlighted" href="#"
+                                                                   th:href="@{|/creator/${commission.user}|}"
+                                                                   th:text="${commission.user}"></a></p>
 
-            <div th:if="${userEmail} == ${#authentication.name}">
-                <button type="button" sec:authorize="isAuthenticated()">
-                    <a th:href="@{|/creator/edit-commission/${commission.id}|}">Edit</a>
-                </button>
-            </div>
-            <div th:if="${userEmail} == ${#authentication.name}">
-                <button type="button" sec:authorize="isAuthenticated()">
-                    <a th:href="@{|/creator/delete-commission/${commission.id}|}">Delete</a>
-                </button>
-            </div>
+                    <p class="commission-summary-item">Description: <span class="highlighted"
+                                                                          th:text="${commission.description}"></span></p>
+                    <p class="commission-summary-item">Time needed: <span class="highlighted"
+                                                                          th:text="${commission.timeNeeded}"></span> days
+                    </p>
+                    <p class="commission-summary-item">Preferred cooperation: <span class="highlighted"
+                                                                                    th:text="${commission.preferredCooperation}"></span>
+                    </p>
+                    <p class="commission-summary-item">Pricing: <span
+                            th:text="${#strings.concat('$', #numbers.formatDecimal(commission.pricingFrom, 2, 2))}">$100.00</span>
+                        - <span th:text="${#strings.concat('$', #numbers.formatDecimal(commission.pricingTo, 2, 2))}">$200.00</span>
+                    </p>
+                </div>
+
+
+                <div class="project-section project-availability">
+                    <h2 class="commission-summary-item">Availability</h2>
+                    <p>
+                        <i class="fa-solid fa-square-check" th:if="${commission.availability == true}" style="color:green;font-size:40px;"></i>
+                        <i class="fa-solid fa-circle-xmark" th:if="${commission.availability == false}" style="color:red;font-size:40px;"></i>
+                    </p>
+                    <p th:text="${commission.availability ? 'Available' : 'Not available'}"></p>
+                </div>
+
+
+                <div th:if="${userEmail} == ${#authentication.name}">
+                    <button type="button" class="custom-button" sec:authorize="isAuthenticated()">
+                        <a th:href="@{|/creator/edit-commission/${commission.id}|}">Edit</a>
+                    </button>
+                    <button type="button" class="custom-button" sec:authorize="isAuthenticated()">
+                        <a th:href="@{|/creator/delete-commission/${commission.id}|}">Delete</a>
+                    </button>
+                </div>
+
         </section>
 
     </main>

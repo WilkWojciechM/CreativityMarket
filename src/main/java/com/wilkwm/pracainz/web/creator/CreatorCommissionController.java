@@ -78,21 +78,22 @@ public class CreatorCommissionController {
     }
 
     @GetMapping("/creator/delete-commission/{id}")
-    public String deleteProject(@PathVariable Long id, RedirectAttributes redirectAttributes, Authentication authentication) {
+    public String deleteProject(@PathVariable Long id, RedirectAttributes redirectAttributes, Authentication authentication, Model model) {
         // Only allow the logged-in user to delete their own projects
         CommissionDto commission = commissionService.findCommissionById(id).orElseThrow();
         UserDto user = userService.findUserByName(commission.getUser()).orElseThrow();
+        model.addAttribute("userEmail",user.getEmail());
         if (!user.getEmail().equals(authentication.getName())) {
             redirectAttributes.addFlashAttribute(
                     AdminController.NOTIFICATION_ATTRIBUTE,
                     "You are not authorized to delete this project.");
-            return "redirect:/creator-page";
+            return "redirect:/commission-page";
         }
         commissionService.deleteCommission(id);
         redirectAttributes.addFlashAttribute(
                 AdminController.NOTIFICATION_ATTRIBUTE,
                 "Project %s deleted".formatted(commission.getName()));
-        return "redirect:/creator-page";
+        return "redirect:/commission-page";
     }
 
 

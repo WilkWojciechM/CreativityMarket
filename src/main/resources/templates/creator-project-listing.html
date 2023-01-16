@@ -3,22 +3,16 @@
       xmlns:th="https://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">>
-<!--dodać head z wartością nazwy użytkownika -->
+
 
 <body>
 <div class="container">
     <main class="main-content" layout:fragment="content">
-        <!--Nagłówek pobierany z modelu-->
         <h2 class="list-heading" th:text="${heading}">Promoted projects</h2>
-        <!-- Opis pobieramy z modelu -->
         <p class="list-description" th:text="${description}">Opis sekcji, przykładowy</p>
-        <!-- Zostawiamy tylko pierwszy element <li> -->
         <ul class="project-list" th:remove="all-but-first">
-            <!-- Pętla po wszystkich projektach z modelu -->
-            <li class="project-list-item" th:each="project: ${projects}">
-                <!-- Link do strony pojedynczego projektu typu /project/5 -->
+            <li class="project-list-item" th:each="project: ${projects}">>
                 <a href="#" th:href="@{|/project/${project.id}|}">
-                    <!-- Po uruchomieniu aplikacji ścieżka do placeholdera plakatu wygląda nieco inaczej -->
                     <img src="../static/img/poster-placeholder.png"
                          th:src="@{/img/poster-placeholder.png}"
                          alt="Project name"

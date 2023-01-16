@@ -11,6 +11,7 @@ import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,6 +57,23 @@ public class CommissionService {
         return commissionRepository.findAllByAvailabilityIsTrueAndJobOfferIsFalse().stream().map(CommissionDtoMapper::map).toList();
     }
 
+    public List<CommissionDto> findCommissionsByTimeNeededLessThanEqual(Integer time){
+        return commissionRepository.findAllByTimeNeededLessThanEqual(time).stream()
+                .map(CommissionDtoMapper::map)
+                .toList();
+    }
+
+    public List<CommissionDto> findCommissionsByPriceToLessThanEqual(BigDecimal price){
+        return commissionRepository.findAllByPricingToLessThanEqual(price).stream().map(CommissionDtoMapper::map).toList();
+    }
+
+    public List<CommissionDto> findCommissionsByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String keyword) {
+        return commissionRepository.findAllByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(keyword, keyword)
+                .stream()
+                .map(CommissionDtoMapper::map)
+                .toList();
+    }
+
     public void addCommission(CommissionDto saveCommission) {
         Commission commission = new Commission();
         commissionHandling(saveCommission, commission);
@@ -87,7 +105,6 @@ public class CommissionService {
     }
 
     public void deleteCommission(Long id){
-        //  ratingService.deleteByProjectId(id);
         commissionRepository.deleteById(id);
     }
 }

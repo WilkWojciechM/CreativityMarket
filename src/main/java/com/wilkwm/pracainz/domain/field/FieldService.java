@@ -27,12 +27,15 @@ public class FieldService {
                 .toList();
     }
 
-    //metoda, przyjmuje obiekt FieldDto i tworzy na jego podstawie obiekt Field oraz zapisuje w bazie
     @Transactional
     public void addField(FieldDto field){
         Field fieldSave = new Field();
         fieldSave.setName(field.getName());
         fieldSave.setDescription(field.getDescription());
         fieldRepository.save(fieldSave);
+    }
+
+    public Optional<FieldDto> findFieldById(Long fieldId){
+        return fieldRepository.findFieldById(fieldId).map(FieldDtoMapper::map);
     }
 }

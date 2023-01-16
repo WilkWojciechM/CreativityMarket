@@ -45,27 +45,6 @@ public class MessageController {
         return "redirect:/send-message";
     }
 
-//    @GetMapping("/messages")
-//    public String getMessages(Model model, Authentication authentication, @ModelAttribute("message") MessageDto messageDto) {
-//        String userEmail = authentication.getName();
-//        String receiver = "creator";
-//        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> new IllegalArgumentException("User not found"));
-//        String userName = user.getName();
-//        List<UserDto> allUsers = userService.findAllRegisteredUsers();
-//
-//        List<MessageDto> messages = messageService.getMessages(userName, receiver);
-//        model.addAttribute("receiver", receiver);
-//        model.addAttribute("allUsers", allUsers);
-//        model.addAttribute("messages", messages);
-//        model.addAttribute("sender", userName);
-//        return "messages";
-//    }
-//    @PostMapping("/messages")
-//    public String getMessages(@ModelAttribute MessageDto message) {
-//        messageService.sendMessage(message.getSender(), message.getReceiver(), message.getContent());
-//        return "redirect:/messages";
-//    }
-
     @GetMapping("/messages")
     public String getMessages(Model model, Authentication authentication) {
         String userEmail = authentication.getName();

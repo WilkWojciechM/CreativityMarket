@@ -2,7 +2,6 @@ package com.wilkwm.pracainz.domain.commission;
 
 import com.wilkwm.pracainz.domain.field.Field;
 import com.wilkwm.pracainz.domain.user.User;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,7 +19,7 @@ public class Commission {
     private User user;
 
     private String description;
-    private String timeNeeded;
+    private Integer timeNeeded;
     private String preferredCooperation;
     private BigDecimal pricingFrom;
     private BigDecimal pricingTo;
@@ -64,11 +63,11 @@ public class Commission {
         this.description = description;
     }
 
-    public String getTimeNeeded() {
+    public Integer getTimeNeeded() {
         return timeNeeded;
     }
 
-    public void setTimeNeeded(String timeNeeded) {
+    public void setTimeNeeded(Integer timeNeeded) {
         this.timeNeeded = timeNeeded;
     }
 

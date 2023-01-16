@@ -31,7 +31,7 @@
             </div>
             <form th:action="@{/remove-from-favorites}" method="post">
                 <input type="hidden" name="projectId" th:value="${project.id}"/>
-                <button type="submit" sec:authorize="isAuthenticated()">Remove from favorites</button>
+                <button type="submit" class="custom-button" sec:authorize="isAuthenticated()">Remove from favorites</button>
             </form>
         </div>
     </li>

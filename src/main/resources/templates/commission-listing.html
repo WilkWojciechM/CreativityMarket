@@ -7,34 +7,49 @@
 <body>
 <div class="container">
     <main class="main-content" layout:fragment="content">
-        <!--Nagłówek pobierany z modelu-->
         <h2 class="list-heading" th:text="${heading}">Commission list</h2>
-        <!-- Opis pobieramy z modelu -->
         <p class="list-description" th:text="${description}"></p>
 
-            <input type="submit" value="Search" />
-        </form>
 
-        <ul class="project-list" th:remove="all-but-first">
-            <!-- Pętla po wszystkich projektach z modelu -->
-            <li class="project-list-item" th:each="commission: ${commissions}">
-                <!-- Link do strony pojedynczego projektu typu /project/5 -->
-                <a href="#" th:href="@{|/commission/${commission.id}|}">
-                </a>
-                <div class="project-list-item-card">
-                    <div class="project-list-item-content">
-                        <h3 class="project-list-item-title">
-                            <a href="#" th:href="@{|/commission/${commission.id}|}" th:text="${commission.name}">Commission name</a>
-                        </h3>
-                        <h4>
-                            <a href="#" th:href="@{|/creator/${commission.user}|}" th:text="${commission.user}">Creator</a>
-                        </h4>
-                        <h4>
-                           <div th:text="${commission.field}">Field</div>
-                        </h4>
-                    </div>
-                </div>
-        </ul>
+        <div th:if="${pageName != null && (pageName == '/creator-commissions' || pageName == '/employer-commissions' || pageName == '/commissions/search')}">
+        <form th:action="@{/commissions/search}" method="get">
+                <label for="field">Search by Field:</label>
+                <select id="field" name="fieldId" style="color: black;">
+                    <option value="" hidden>Choose field</option>
+                    <option th:each="field: ${fields}" th:value="${field.id}" th:text="${field.name}"></option>
+                </select>
+            <br>or<br>
+                <label for="timeNeeded">Search by days needed:</label>
+                <input type="text" id="timeNeeded" name="timeNeeded" placeholder="Enter number of days"
+                       style="color: black;">
+                <br>or<br>
+                <label for="pricingTo">Search by max price:</label>
+                <input type="text" id="pricingTo" name="pricingTo" placeholder="Enter price you are willing to pay"
+                       style="color: black;">
+            <br>or<br>
+                <label for="keyword">Search by word</label>
+                <input type="text" id="keyword" name="keyword" placeholder="Enter keyword" style="color: black;">
+            <br>
+                <button type="submit" style="background-color: black; color:white;">Search</button>
+            </form>
+       </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Creator</th>
+                <th>Field</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="commission : ${commissions}">
+                <td><a th:href="@{|/commission/${commission.id}|}" th:text="${commission.name}"></a></td>
+                <td><a th:href="@{|/creator/${commission.user}|}" th:text="${commission.user}"></a></td>
+                <td><a th:href="@{|/field/${commission.field}|}" th:text="${commission.field}"></a></td>
+            </tr>
+            </tbody>
+        </table>
     </main>
 </div>
 </body>

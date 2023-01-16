@@ -24,7 +24,14 @@ public class FavoriteUserService {
     public void addToFavorites(String userEmail, String favoriteUserEmail) {
         User user = userRepository.findByEmail(userEmail).orElseThrow();
         User favoriteUser = userRepository.findByEmail(favoriteUserEmail).orElseThrow();
-        favoriteUserRepository.save(new FavoriteUser(user, favoriteUser));
+        Optional<FavoriteUser> existingFavorite = favoriteUserRepository.findByUserIdAndFavoriteUserId(user.getId(), favoriteUser.getId());
+        if (existingFavorite.isPresent()) {
+            existingFavorite.get().setUser(user);
+            existingFavorite.get().setFavoriteUser(favoriteUser);
+            favoriteUserRepository.save(existingFavorite.get());
+        } else {
+            favoriteUserRepository.save(new FavoriteUser(user, favoriteUser));
+        }
     }
 
     public void removeFromFavorites(String userEmail, String favoriteUserEmail) {

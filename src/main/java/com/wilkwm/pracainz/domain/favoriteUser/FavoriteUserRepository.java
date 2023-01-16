@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface FavoriteUserRepository extends CrudRepository<FavoriteUser, Long> {
     Optional<FavoriteUser> findByUser_EmailAndFavoriteUser_Email(String userEmail, String favoriteUserEmail);
     List<FavoriteUser> findAllByUser_Email(String userEmail);
+
+    Optional<FavoriteUser> findByUserIdAndFavoriteUserId(Long userId, Long favoriteUserId);
 }

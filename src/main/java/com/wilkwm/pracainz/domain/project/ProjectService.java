@@ -18,7 +18,7 @@ public class ProjectService {
     private final FieldRepository fieldRepository;
     private final FileStorageService fileStorageService;
     private  final UserRepository userRepository;
-  //  private final RatingService ratingService;
+
 
 
     public ProjectService(ProjectRepository projectRepository, FieldRepository fieldRepository, FileStorageService fileStorageService, UserRepository userRepository) {

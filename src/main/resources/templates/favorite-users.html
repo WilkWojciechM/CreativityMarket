@@ -25,7 +25,7 @@
                     </div>
                     <form th:action="@{/remove-from-favorite-users}" method="post">
                         <input type="hidden" name="favoriteUserEmail" th:value="${user.getEmail()}"/>
-                        <button type="submit" sec:authorize="isAuthenticated()">Remove from favorites</button>
+                        <button type="submit" class="custom-button" sec:authorize="isAuthenticated()">Remove from favorites</button>
                     </form>
                 </div>
             </li>

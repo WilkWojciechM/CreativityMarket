@@ -24,7 +24,6 @@ class CustomSecurityConfig {
                 .anyRequest().permitAll()
         )
                 //domyślny formularz logowania
-               // .formLogin(Customizer.withDefaults());
                 .formLogin(login -> login.loginPage("/login").permitAll())
 
                 //z dokumentacji CSRF

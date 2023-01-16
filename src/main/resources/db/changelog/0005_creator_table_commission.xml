@@ -11,7 +11,7 @@
             </column>
             <column name="name" type="VARCHAR(100)"/>
             <column name="description" type="VARCHAR(1000)"/>
-            <column name="time_needed" type="VARCHAR(100)"/>
+            <column name="time_needed" type="INTEGER"/>
             <column name="preferred_cooperation" type="VARCHAR(100)"/>
             <column name="pricing_from" type="DECIMAL(10,2)"/>
             <column name="pricing_to" type="DECIMAL(10,2)"/>

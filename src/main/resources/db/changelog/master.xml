@@ -10,7 +10,7 @@
         <include file="0002_create_table_project.xml" relativeToChangelogFile="true" />
         <include file="0004_table_project_rating.xml" relativeToChangelogFile="true" />
         <include file="0005_creator_table_commission.xml" relativeToChangelogFile="true"/>
-        <include file="0006_user_fav_table.xml" relativeToChangelogFile="true" />
+        <include file="0006_user_fav_project_table.xml" relativeToChangelogFile="true" />
         <include file="0007_fav_users_table.xml" relativeToChangelogFile="true"/>
         <include file="0008_create_message_table.xml" relativeToChangelogFile="true"/>
 

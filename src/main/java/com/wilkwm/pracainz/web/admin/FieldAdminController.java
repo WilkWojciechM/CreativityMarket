@@ -24,7 +24,7 @@ public class FieldAdminController {
         return "admin/field-form";
     }
 
-   //Flash Message in Spring Boot with Thymeleaf
+
     @PostMapping("/admin/add-field")
     public String addField(FieldDto field, RedirectAttributes redirectAttributes){
         fieldService.addField(field);
