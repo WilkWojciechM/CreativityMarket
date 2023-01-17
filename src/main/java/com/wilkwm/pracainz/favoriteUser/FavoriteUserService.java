@@ -1,10 +1,10 @@
-package com.wilkwm.pracainz.domain.favoriteUser;
+package com.wilkwm.pracainz.favoriteUser;
 
 import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
-import com.wilkwm.pracainz.domain.user.UserService;
-import com.wilkwm.pracainz.domain.user.dto.UserDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +22,8 @@ public class FavoriteUserService {
     }
 
     public void addToFavorites(String userEmail, String favoriteUserEmail) {
-        User user = userRepository.findByEmail(userEmail).orElseThrow();
-        User favoriteUser = userRepository.findByEmail(favoriteUserEmail).orElseThrow();
+        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        User favoriteUser = userRepository.findByEmail(favoriteUserEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Optional<FavoriteUser> existingFavorite = favoriteUserRepository.findByUserIdAndFavoriteUserId(user.getId(), favoriteUser.getId());
         if (existingFavorite.isPresent()) {
             existingFavorite.get().setUser(user);
@@ -35,10 +35,10 @@ public class FavoriteUserService {
     }
 
     public void removeFromFavorites(String userEmail, String favoriteUserEmail) {
-        User user = userRepository.findByEmail(userEmail).orElseThrow();
-        User favoriteUser = userRepository.findByEmail(favoriteUserEmail).orElseThrow();
+        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        User favoriteUser = userRepository.findByEmail(favoriteUserEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         FavoriteUser favorite = favoriteUserRepository.findByUser_EmailAndFavoriteUser_Email(userEmail, favoriteUserEmail)
-                .orElseThrow();
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         favoriteUserRepository.delete(favorite);
     }
     public List<User> getFavoriteUsers(String userEmail) {

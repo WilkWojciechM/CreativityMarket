@@ -8,7 +8,10 @@ import com.wilkwm.pracainz.domain.project.dto.SaveProjectDto;
 import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
 import com.wilkwm.pracainz.domain.storage.FileStorageService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -49,10 +52,10 @@ public class ProjectService {
         Project project = new Project();
         project.setName(saveProject.getName());
 
-        Field field = fieldRepository.findByNameIgnoreCase(saveProject.getField()).orElseThrow();
+        Field field = fieldRepository.findByNameIgnoreCase(saveProject.getField()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         project.setField(field);
 
-        User user = userRepository.findByName(saveProject.getUser()).orElseThrow();
+        User user = userRepository.findByName(saveProject.getUser()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         project.setUser(user);
 
 
@@ -68,11 +71,11 @@ public class ProjectService {
     }
 
     public void updateProject(Long id, SaveProjectDto projectDto) {
-        Project project = projectRepository.findById(id).orElseThrow();
+        Project project = projectRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         project.setName(projectDto.getName());
         project.setDescription(projectDto.getDescription());
         project.setYoutubeId(projectDto.getYoutubeId());
-        project.setField(fieldRepository.findByNameIgnoreCase(projectDto.getField()).orElseThrow());
+        project.setField(fieldRepository.findByNameIgnoreCase(projectDto.getField()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
         project.setPromoted(projectDto.isPromoted());
         if (projectDto.getProjectPic() != null) {
             String savedFileName = fileStorageService.saveImage(projectDto.getProjectPic());

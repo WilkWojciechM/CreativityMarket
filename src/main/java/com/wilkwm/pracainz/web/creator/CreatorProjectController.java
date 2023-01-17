@@ -9,10 +9,12 @@ import com.wilkwm.pracainz.domain.project.dto.SaveProjectDto;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import com.wilkwm.pracainz.web.admin.AdminController;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -63,9 +65,9 @@ public class CreatorProjectController {
     @GetMapping("/creator/edit-project/{id}")
     public String editProjectForm(@PathVariable Long id, Model model, Authentication authentication) {
        // long projectId = Long.parseLong(id);
-        ProjectDto project = projectService.findProjectById(id).orElseThrow();
+        ProjectDto project = projectService.findProjectById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        UserDto user = userService.findUserByName(project.getUser()).orElseThrow();
+        UserDto user = userService.findUserByName(project.getUser()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("userEmail",user.getEmail());
 
         ProjectDto projectDto = new ProjectDto(project.getId(), project.getName(), project.getField(), project.getUser(), project.isPromoted(), project.getDescription(), project.getYoutubeId(), project.getProjectPic(), project.getAvgRating(), project.getRatingCount());

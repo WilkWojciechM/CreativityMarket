@@ -1,4 +1,4 @@
-package com.wilkwm.pracainz.domain.favoriteUser;
+package com.wilkwm.pracainz.favoriteUser;
 
 import org.springframework.data.repository.CrudRepository;
 

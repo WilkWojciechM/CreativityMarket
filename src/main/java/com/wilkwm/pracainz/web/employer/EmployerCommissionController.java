@@ -7,12 +7,14 @@ import com.wilkwm.pracainz.domain.field.dto.FieldDto;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import com.wilkwm.pracainz.web.admin.AdminController;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -62,7 +64,7 @@ public class EmployerCommissionController {
     @GetMapping("/employer/edit-commission/{id}")
     public String editCommissionForm(@PathVariable Long id, Model model) {
         CommissionDto commission = commissionService.findCommissionById(id).orElseThrow();
-        UserDto user = userService.findUserByName(commission.getUser()).orElseThrow();
+        UserDto user = userService.findUserByName(commission.getUser()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<FieldDto> allField = fieldService.findAllFields();
         model.addAttribute("field", allField);
 
@@ -82,8 +84,8 @@ public class EmployerCommissionController {
     @GetMapping("/employer/delete-commission/{id}")
     public String deleteProject(@PathVariable Long id, RedirectAttributes redirectAttributes, Authentication authentication) {
         // Only allow the logged-in user to delete their own projects
-        CommissionDto commission = commissionService.findCommissionById(id).orElseThrow();
-        UserDto user = userService.findUserByName(commission.getUser()).orElseThrow();
+        CommissionDto commission = commissionService.findCommissionById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        UserDto user = userService.findUserByName(commission.getUser()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         if (!user.getEmail().equals(authentication.getName())) {
             redirectAttributes.addFlashAttribute(
                     AdminController.NOTIFICATION_ATTRIBUTE,

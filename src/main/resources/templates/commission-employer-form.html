@@ -13,22 +13,27 @@
     <h2 class="list-heading">Add commission</h2>
     <form action="#" th:action="@{/employer/add-commission}" method="post" enctype="multipart/form-data" class="mc-form" th:object="${commission}">
         <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Example name" th:field="*{name}">
+        <input type="text" id="name" placeholder="Example name" th:field="*{name}" required>
 
         <label for="description" >Description</label>
-        <textarea id="description" rows="6" th:field="*{description}"></textarea>
+        <textarea id="description" rows="6" th:field="*{description}" required></textarea>
 
         <label for="timeNeeded">Time needed  (in days)</label>
-        <input type="text" id="timeNeeded" placeholder="Time needed" th:field="*{timeNeeded}">
+        <input type="text" id="timeNeeded" placeholder="Time needed" th:field="*{timeNeeded}" required>
 
         <label for="preferredCooperation">Preferred cooperation</label>
-        <input type="text" id="preferredCooperation" placeholder="Preferred cooperation" th:field="*{preferredCooperation}">
+        <select id="preferredCooperation" required th:field="*{preferredCooperation}">
+            <option value="" hidden>Choose cooperation option</option>
+            <option value="Office Work">Office Work</option>
+            <option value="Hybrid Work">Hybrid Work</option>
+            <option value="Work Remotely">Work Remotely</option>
+        </select>
 
         <label for="pricingFrom">Pricing from  (in dollars)</label>
-        <input type="number" id="pricingFrom" placeholder="Pricing from" th:field="*{pricingFrom}">
+        <input type="number" id="pricingFrom" placeholder="Pricing from" th:field="*{pricingFrom}" required>
 
         <label for="pricingTo">Pricing to  (in dollars)</label>
-        <input type="number" id="pricingTo" placeholder="Pricing to" th:field="*{pricingTo}">
+        <input type="number" id="pricingTo" placeholder="Pricing to" th:field="*{pricingTo}" required>
 
         <label for="availability">Availability</label>
         <input id="availability" type="checkbox" th:field="*{availability}">

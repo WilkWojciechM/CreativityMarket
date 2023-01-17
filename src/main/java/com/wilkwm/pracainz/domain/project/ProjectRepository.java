@@ -13,4 +13,5 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
     Optional<Project> findByUser_Email(String userEmail);
     List<Project> findAllByField_NameIgnoreCase(String field);
     List<Project> findAllByUser_Name(String name);
+
 }

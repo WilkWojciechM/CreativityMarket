@@ -36,7 +36,7 @@ public class CommissionController {
     public String getCommission(@PathVariable long id, Model model) {
         CommissionDto commission = commissionService.findCommissionById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        UserDto user = userService.findUserByName(commission.getUser()).orElseThrow();
+        UserDto user = userService.findUserByName(commission.getUser()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("userEmail",user.getEmail());
         model.addAttribute("commission", commission);
         return "commission";
@@ -77,7 +77,7 @@ public class CommissionController {
         List<FieldDto> allField = fieldService.findAllFields();
         model.addAttribute("fields", allField);
         if(fieldId != null){
-            FieldDto field = fieldService.findFieldById(fieldId).orElseThrow();
+            FieldDto field = fieldService.findFieldById(fieldId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             commissions = commissionService.findCommissionsByFieldName(field.getName());
         }
         if(timeNeeded != null){

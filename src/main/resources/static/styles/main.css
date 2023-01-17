@@ -370,8 +370,12 @@ a {
 
     #field option {
         color: black;
+    }
 
-}
+    #preferredCooperation option{
+        color: black;
+    }
+
     #receiver option {
         color: black;
     }
@@ -410,7 +414,6 @@ a {
         font-size: larger;
     }
 
-    Copy code
     .commission-summary-info p {
         font-size: 18px;
     }
@@ -436,5 +439,8 @@ a {
     .project-section.project-availability p {
         display: inline-block;
         vertical-align: middle;
+    }
+    .image-link:active img {
+        transform: scale(2);
     }
 }

@@ -12,10 +12,12 @@
     <main class="main-content" layout:fragment="content">
         <section class="project">
             <div class="project-summary">
-                <img th:if="${project.projectPic}" th:src="@{|/img/${project.projectPic}|}"
-                     src="../static/img/poster-placeholder.png"
-                     alt="project name"
-                     class="project-summary-cover">
+                <a href="#" class="image-link">
+                    <img src="../static/img/poster-placeholder.png"
+                         th:src="${project.projectPic != ''} ? '/img/' + ${project.projectPic} : '/img/poster-placeholder.png'"
+                         alt="project title"
+                         class="project-list-item-image">
+                </a>
             </div>
         <div class="project-summary-info">
             <h1 class="project-summary-title" th:text="${project.name}">Project name</h1>
@@ -86,6 +88,8 @@
 
         </section>
 
+
+        <div th:if="${project.youtubeId} != ''">
         <section class="project-project-container project-section">
             <h2 class="project-section-heading">Project trailer</h2>
             <iframe width="560" height="315" class="project-trailer"
@@ -93,6 +97,7 @@
                     th:src="|https://www.youtube.com/embed/${project.youtubeId}|"
                     allow="autoplay:encrypted-media" allowfullscreen></iframe>
         </section>
+        </div>
     </main>
     <footer class="footer">
         <p>CreativityMarket 2022 <i class="fas fa-copyright"></i> Wojciech Wilk </p>

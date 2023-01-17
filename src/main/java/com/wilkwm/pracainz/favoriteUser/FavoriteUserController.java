@@ -1,7 +1,6 @@
-package com.wilkwm.pracainz.domain.favoriteUser;
+package com.wilkwm.pracainz.favoriteUser;
 
 import com.wilkwm.pracainz.domain.user.User;
-import com.wilkwm.pracainz.domain.user.UserRole;
 import com.wilkwm.pracainz.domain.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

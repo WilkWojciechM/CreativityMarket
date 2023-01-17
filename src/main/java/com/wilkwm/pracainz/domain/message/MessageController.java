@@ -6,11 +6,13 @@ import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
 import com.wilkwm.pracainz.domain.user.UserService;
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class MessageController {
     @GetMapping("/send-message")
     public String sendMessage(Model model, Authentication authentication) {
         String userEmail = authentication.getName();
-        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         String userName = user.getName();
 
         Message message = new Message();
@@ -45,10 +47,10 @@ public class MessageController {
         return "redirect:/send-message";
     }
 
-    @GetMapping("/messages")
+    @GetMapping("/Messages")
     public String getMessages(Model model, Authentication authentication) {
         String userEmail = authentication.getName();
-        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         String userName = user.getName();
 
         List<MessageDto> messages = messageService.getAllMessagesForUser(userName);

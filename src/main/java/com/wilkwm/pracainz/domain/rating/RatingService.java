@@ -4,7 +4,9 @@ import com.wilkwm.pracainz.domain.project.Project;
 import com.wilkwm.pracainz.domain.project.ProjectRepository;
 import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 @Service
@@ -22,8 +24,8 @@ public class RatingService {
 
     public void addRating(String userEmail, Long projectId, int rating) {
         Rating ratingSave = ratingRepository.findByUser_EmailAndProject_id(userEmail, projectId).orElseGet(Rating::new);
-        User user = userRepository.findByEmail(userEmail).orElseThrow();
-        Project project = projectRepository.findById(projectId).orElseThrow();
+        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Project project = projectRepository.findById(projectId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         ratingSave.setUser(user);
         ratingSave.setProject(project);
         ratingSave.setRating(rating);

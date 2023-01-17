@@ -2,8 +2,10 @@ package com.wilkwm.pracainz.domain.user;
 
 import com.wilkwm.pracainz.domain.user.dto.UserDto;
 import com.wilkwm.pracainz.domain.user.dto.UserRegistrationDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
@@ -62,7 +64,7 @@ public class UserService {
             user.setEmail(userRegistrationDto.getEmail());
             user.setName(userRegistrationDto.getName());
             user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
-            UserRole role = userRoleRepository.findByName(userRegistrationDto.getRole()).orElseThrow();
+            UserRole role = userRoleRepository.findByName(userRegistrationDto.getRole()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             user.getRoles().add(role);
             userRepository.save(user);
 

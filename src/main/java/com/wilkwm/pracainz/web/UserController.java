@@ -52,7 +52,7 @@ private final CommissionService commissionService;
     }
     @GetMapping("/creator/self")
     public String getCreatorSelf(Model model, Authentication authentication) {
-        UserDto user = userService.findInfoByEmail(authentication.getName()).orElseThrow();
+        UserDto user = userService.findInfoByEmail(authentication.getName()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         String name = user.getName();
         getUser(name, model);
         return "creator/creator-page";
@@ -60,7 +60,7 @@ private final CommissionService commissionService;
 
     @GetMapping("/employer/self")
     public String getCEmployerSelf(Model model, Authentication authentication) {
-        UserDto user = userService.findInfoByEmail(authentication.getName()).orElseThrow();
+        UserDto user = userService.findInfoByEmail(authentication.getName()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         String name = user.getName();
         getUser(name, model);
         return "employer/employer-page";
@@ -134,7 +134,7 @@ private final CommissionService commissionService;
 
     @GetMapping("/user/{id}")
     public String showUser(@PathVariable Long id, Model model) {
-        User user = userService.findUserById(id).orElseThrow();
+        User user = userService.findUserById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Set<String> roleNames = userService.findUserRoles(id);
         model.addAttribute("user", user);
         model.addAttribute("userRoleNames", roleNames);

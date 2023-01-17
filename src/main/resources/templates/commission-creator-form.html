@@ -22,7 +22,12 @@
         <input type="text" id="timeNeeded" placeholder="Time needed" th:field="*{timeNeeded}">
 
         <label for="preferredCooperation">Preferred cooperation</label>
-        <input type="text" id="preferredCooperation" placeholder="Preferred cooperation" th:field="*{preferredCooperation}">
+        <select id="preferredCooperation" th:field="*{preferredCooperation}">
+            <option value="" hidden>Choose cooperation option</option>
+            <option value="Office Work">Office Work</option>
+            <option value="Hybrid Work">Hybrid Work</option>
+            <option value="Work Remotely">Work Remotely</option>
+        </select>
 
         <label for="pricingFrom">Pricing from  (in dollars)</label>
         <input type="number" id="pricingFrom" placeholder="Pricing from" th:field="*{pricingFrom}">

@@ -9,7 +9,9 @@ import com.wilkwm.pracainz.domain.project.ProjectDtoMapper;
 import com.wilkwm.pracainz.domain.project.dto.ProjectDto;
 import com.wilkwm.pracainz.domain.user.User;
 import com.wilkwm.pracainz.domain.user.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -78,18 +80,18 @@ public class CommissionService {
         Commission commission = new Commission();
         commissionHandling(saveCommission, commission);
 
-        Field field = fieldRepository.findByNameIgnoreCase(saveCommission.getField()).orElseThrow();
+        Field field = fieldRepository.findByNameIgnoreCase(saveCommission.getField()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         commission.setField(field);
 
-        User user = userRepository.findByName(saveCommission.getUser()).orElseThrow();
+        User user = userRepository.findByName(saveCommission.getUser()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         commission.setUser(user);
 
         commissionRepository.save(commission);
     }
     public void updateCommission(Long id, CommissionDto commissionDto) {
-        Commission commission = commissionRepository.findById(id).orElseThrow();
+        Commission commission = commissionRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         commissionHandling(commissionDto, commission);
-        commission.setField(fieldRepository.findByNameIgnoreCase(commissionDto.getField()).orElseThrow());
+        commission.setField(fieldRepository.findByNameIgnoreCase(commissionDto.getField()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
         commissionRepository.save(commission);
     }
 
